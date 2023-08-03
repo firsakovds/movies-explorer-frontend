@@ -1,2 +1,2 @@
 # movies-explorer-frontend
-Frontend часть дипломного проекта
+Frontend часть дипломного проекта.
