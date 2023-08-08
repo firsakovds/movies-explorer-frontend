@@ -90,6 +90,15 @@
     max-width: 260px;
   }
 }
+@media (max-width: 400px) {
+  .promo__logo {
+    margin: 0 auto;
+    padding-top: 70px;
+    max-width: 220px;
+    max-height: 210px;
+    
+  }
+}
 @media (max-width: 320px) {
   .promo__logo {
     margin: 0 auto;
