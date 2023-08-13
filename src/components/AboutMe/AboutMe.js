@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import MyFoto from "../../images/myfoto.jpg";
 function AboutMe() {
   return (
-    <section className="about-me" id="about-me">
+    <section className="about-me">
       <h3 className="about-me__title section-title">Студент</h3>
       <div className="about-me__div">
         <div className="about-me__info">

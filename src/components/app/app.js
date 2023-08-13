@@ -1,12 +1,19 @@
 import "./App.css";
 import React from "react";
-import Header from "../Header/Header.js";
-import Main from "../Main/Main.js"
+
+import Main from "../Main/Main"
+import Movies from "../Movies/Movies"
+import { Route, Routes } from "react-router-dom";
 function App() {
   return (
     <div className="page" >
-      <Header />
-      <Main />
+      <Routes>
+      <Route path="/" element={ <Main />}/>
+<Route path="/movies" element={<Movies/>}/>
+        
+      </Routes>
+     
+
     </div>
   )
 }
