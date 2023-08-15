@@ -10,12 +10,11 @@ function Navigation() {
         <Link className="navigation__movies-link" to="/movies">Фильмы</Link>
         <Link className="navigation__movies-link" to="/saved-movies">Сохранённые фильмы</Link>
       </div>
-      <div className="navigation__profile">
-        <Link className="navigation__profile-link">Аккаунт</Link>
-        <button className="navigation__profile-button"/>
-      </div>
+      <Link className="navigation__profile" to="/profile">
+        <p className="navigation__profile-link">Аккаунт</p>
+        <button className="navigation__profile-icon"/>
+      </Link>
     </nav>
-    
 
   )
 }

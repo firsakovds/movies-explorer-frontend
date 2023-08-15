@@ -1,0 +1,89 @@
+.card {
+  margin: 0 auto;
+  display: flex;
+  max-width: 270px;
+  flex-direction: column;
+  padding-bottom: 38px;
+}
+
+.card_img {
+  display: flex;
+}
+
+.card__div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-bottom: 1px solid rgba(232, 232, 232, 1);
+  padding-bottom: 25px;
+}
+
+.card__title {
+  margin: 0;
+  display: flex;
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  max-width: 226px;
+}
+
+.card__time {
+  margin: 0;
+  display: flex;
+  max-width: 34px;
+  color: #a0a0a0;
+  font-family: Inter;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 6px;
+}
+
+.card__like-button {
+  background-image: url("../../images/dislaike.svg");
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 20px;
+  border: none;
+  background-color: transparent;
+}
+
+.card__like-button:active {
+  background-image: url("../../images/like.svg");
+}
+
+@media (max-width: 768px) {
+  .card {
+    max-width: 339px;
+  }
+
+  .card_img {
+    max-width: 339px;
+  }
+}
+
+@media (max-width: 750px) {
+  .card {
+    max-width: 290px;
+  }
+
+  .card_img {
+    max-width: 339px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card {
+    max-width: 300px;
+  }
+
+  .card_img {}
+}
