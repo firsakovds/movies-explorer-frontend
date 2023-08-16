@@ -1,0 +1,130 @@
+.burger-menu {
+  top: 0;
+  right: 0;
+  position: fixed;
+  visibility: hidden;
+  z-index: 2;
+}
+
+.burger-menu_overlay {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.burger-menu_open {
+  visibility: visible;
+}
+
+.burger-menu__div {
+  margin: 0;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 520px;
+  height: 100vh;
+  position: relative;
+  background: #fff;
+  margin-left: 100vw;
+}
+
+.burger-menu__button-close {
+  width: 22px;
+  height: 22px;
+  background-image: url("../../images/burger_icon-close.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transform: rotate(0deg);
+  align-self: flex-end;
+  margin-right: 22px;
+  margin-top: 22px;
+}
+
+.burger-menu__button-close:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.burger-menu__links {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  margin-top: 76px;
+}
+
+.burger-menu__link {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  padding-top: 28px;
+}
+
+.burger-menu__link_active {
+  border-bottom: 2px solid rgba(0, 0, 0, 1);
+}
+
+.burger-menu__link:hover {
+  opacity: 0.7;
+}
+
+.burger-menu__profile {
+  width: 100px;
+  height: 32px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 40px;
+  background: #fff;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  position: fixed;
+  bottom: 90px;
+}
+
+.burger-menu__profile:hover {
+  opacity: 0.7;
+}
+
+.burger-menu__profile-link {
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  /* 92.308% */
+  text-align: right;
+  padding-left: 12px;
+}
+
+.burger-menu__profile-icon {
+  background-image: url("../../images/movies_account-icon.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+}
+
+@media (max-width: 540px) {
+  .burger-menu__links {
+    width: 100vw;
+  }
+
+  .burger-menu__div {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .burger-menu__profile {
+    bottom: 46px;
+  }
+}

@@ -10,9 +10,9 @@
   padding: 0;
   list-style-type: none;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   justify-items: center;
-  column-gap: 20px;
+  column-gap: 15px;
 }
 
 .movies-cards__button {
@@ -55,5 +55,8 @@
 
   .movies-cards {
     padding: 40px 10px 80px 10px;
+  }
+  .movies-cards__button {
+    max-width: 240px;
   }
 }

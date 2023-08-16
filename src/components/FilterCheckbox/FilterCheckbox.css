@@ -69,3 +69,31 @@
   background-color: rgba(43, 224, 128, 1);
   transition: 0.5s;
 }
+
+@media (max-width:768px) {
+  .filter {
+    margin: 0 auto;
+    flex-direction: row-reverse;
+
+margin-top: 30px;
+  }
+  .filter__chechbox {
+    margin-left: 16px;
+     
+    
+    }
+
+}
+@media (max-width:320px) {
+  .filter {
+    margin: 0 auto;
+    flex-direction: row-reverse;
+max-width: 94px;
+margin-top: 41px;
+  }
+  .filter__chechbox {
+  margin-left: 13px;
+   
+  
+  }
+}

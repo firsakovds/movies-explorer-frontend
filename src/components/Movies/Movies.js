@@ -10,7 +10,7 @@ function Movies() {
     <div>
       <HeaderMovies/>
 <SearchForm/>
-{/*<Preloader/> */}
+{/*<Preloader/>*/ }
 <MoviesCardList/>
 <Footer/>
     </div>

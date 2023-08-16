@@ -39,13 +39,13 @@
     }
 }
 
-.preloader {
+.preloader {    
     display: flex;
     align-items: center;
     justify-content: center;  
     height: 100%;
     z-index: 10;
-    padding: 20px;
+    padding: 20px;    
 }
 
 .preloader__container {

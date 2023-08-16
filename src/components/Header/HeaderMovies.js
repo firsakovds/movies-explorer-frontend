@@ -11,7 +11,7 @@ function HeaderMovies() {
         <img className="header__logo-movies" alt="логотип" src={logo} />
       </Link>
      <Navigation/>
-     <button className="header__burger-button"></button>
+     <button className="header__burger-button "></button>
     </header>
   )
 }

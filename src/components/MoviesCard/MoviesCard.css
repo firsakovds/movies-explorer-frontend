@@ -1,13 +1,14 @@
 .card {
   margin: 0 auto;
   display: flex;
-  max-width: 270px;
+  max-width: 100%;
   flex-direction: column;
   padding-bottom: 38px;
 }
 
 .card_img {
   display: flex;
+  max-width: 100%;
 }
 
 .card__div {
@@ -62,27 +63,27 @@
 
 @media (max-width: 768px) {
   .card {
-    max-width: 339px;
+    max-width: 106%;
   }
 
   .card_img {
-    max-width: 339px;
+    
   }
 }
 
 @media (max-width: 750px) {
   .card {
-    max-width: 290px;
+    max-width: 100%;
   }
 
   .card_img {
-    max-width: 339px;
+   
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 370px) {
   .card {
-    max-width: 300px;
+    max-width: 290px;
   }
 
   .card_img {}

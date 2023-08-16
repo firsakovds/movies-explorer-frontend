@@ -21,7 +21,7 @@ font-style: normal;
 font-weight: 500;
 line-height: normal;
 border: none;
-width: 700px;
+width: 85%;
 }
 .search__input:focus {
   outline: none;
@@ -44,4 +44,27 @@ height: 34px;
 .search__button:hover {
    opacity: 0.8;
 cursor: pointer;
+}
+@media (max-width:768px) {
+  .search {
+   
+    padding: 80px 30px 48px 30px;
+    
+  }
+  .search__input {
+  
+  }
+}
+@media (max-width:320px) {
+  .search {
+   
+    padding: 90px 14px 48px 14px;
+    
+  }
+  .search__input {
+    
+    }
+}
+@media (max-width:320px) {
+  
 }
