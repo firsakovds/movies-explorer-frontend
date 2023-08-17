@@ -57,15 +57,29 @@
   background-color: transparent;
 }
 
-.card__like-button:active {
+.card__like-button_active {
   background-image: url("../../images/like.svg");
 }
-
+.card__delete-button {
+  background-image: url("../../images/delete_button.svg");
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 20px;
+  border: none;
+  background-color: transparent;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+.card:hover  .card__delete-button {
+opacity: 1;  
+}
 @media (max-width: 768px) {
   .card {
     max-width: 106%;
   }
-
   .card_img {
     
   }
@@ -75,7 +89,6 @@
   .card {
     max-width: 100%;
   }
-
   .card_img {
    
   }

@@ -14,16 +14,11 @@ function Navigation() {
       </div>
       <Link className="navigation__profile" to="/profile">
         <p className="navigation__profile-link">Аккаунт</p>
-        <button className="navigation__profile-icon"/>
-        
-      </Link>
-      
+        <button className="navigation__profile-icon"/>        
+      </Link>      
     </nav>
     <BurgerMenu/>
     </div>
-   
-    
-
   )
 }
 

@@ -1,19 +1,17 @@
-import "../Movies/Movies.css"
+import "../SavedMovies/SavedMovies.css"
 import HeaderMovies from "../Header/HeaderMovies";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer"
-//import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import React from "react";
-function Movies({ isMovies }) {
+function SavedMovies() {
   return (
     <div>
       <HeaderMovies />
       <SearchForm />
-      {/*<Preloader/>*/}
-      <MoviesCardList isMovies={isMovies} />
+      <MoviesCardList />
       <Footer />
     </div>
   )
 }
-export default Movies;
+export default SavedMovies;

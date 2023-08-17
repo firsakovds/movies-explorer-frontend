@@ -11,7 +11,7 @@
 }
 
 .burger-menu_open {
-  visibility: visible;
+  /*visibility: visible;*/
 }
 
 .burger-menu__div {
