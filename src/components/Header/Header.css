@@ -2,7 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   display: flex;
-  padding: 21px 70px;
+  padding: 16px 70px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -59,7 +59,7 @@
 
 @media (max-width: 320px) {
   .header {
-    padding: 24px 14px;
+    padding: 17px 14px;
   }
 
   .header__signup-link {

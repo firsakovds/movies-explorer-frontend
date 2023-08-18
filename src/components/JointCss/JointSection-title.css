@@ -13,11 +13,12 @@
 }
 @media (max-width: 768px) {
   .section-title{
-    padding-top: 90px;
+    padding-top: 81px;
   }
 }
 @media (max-width: 385px) {
   .section-title {
+    padding-top: 51px;
     font-size: 18px;
     letter-spacing: -0.72px;
     padding-bottom: 28px;

@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding-left: 70px;
   padding-right: 70px;
+ 
 }
 
 .footer__title {
@@ -68,7 +69,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 320px) {
   .footer {
     padding-left: 10px;
     padding-right: 10px;
