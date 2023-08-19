@@ -1,9 +1,7 @@
-.navigation {
-  margin: 0 auto;
+.navigation { 
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 52vw;
+  flex-direction: row; 
+  width: 59%;
   justify-content: space-between;
 }
 
