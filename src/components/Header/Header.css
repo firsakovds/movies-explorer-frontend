@@ -32,7 +32,7 @@
   margin-right: 30px;
 }
 .header__signup-link:hover {
-opacity: 0.7;
+  opacity: 0.7;
 }
 .header__signin-button {
   margin: 0;
@@ -51,7 +51,7 @@ opacity: 0.7;
   /* 133.333% */
 }
 .header__signin-button:hover {
-opacity: 0.8;
+  opacity: 0.8;
 }
 
 .header__signin-button:hover {

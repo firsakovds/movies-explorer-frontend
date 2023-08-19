@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 
 function Navigation() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const clickBurger = () => {
+    setIsOpen(!isOpen);
+  };
   //const navigate = useNavigate();
   return (
     <nav className="navigation">
@@ -19,7 +23,7 @@ function Navigation() {
         <p className="navigation__profile-link">Аккаунт</p>
         <button className="navigation__profile-icon" type="button"></button>
       </Link>
-      <BurgerMenu />
+      {isOpen ? (<BurgerMenu isOpen={clickBurger} onClose={clickBurger} />) : (<button className="navigation__burger-button" type="button" onClick={clickBurger}></button>)}
     </nav>
   );
 }

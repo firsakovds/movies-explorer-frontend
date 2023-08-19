@@ -13,11 +13,11 @@ function Profile() {
             <fieldset className="profile__inputs">
               <div className="profile__field-input">
                 <p className="profile__name-input">Имя</p>
-                <input className="profile__input" type="name" id="name" value="Виталий" minLength="2" maxLength="40" required />
+                <input className="profile__input" type="name" id="name" defaultValue="Виталий" minLength="2" maxLength="40" required />
               </div>
               <div className="profile__field-input">
                 <p className="profile__name-input">E-mail</p>
-                <input className="profile__input" type="email" id="email" value="pochta@yandex.ru" minLength="2" maxLength="40" required />
+                <input className="profile__input" type="email" id="email" defaultValue="pochta@yandex.ru" minLength="2" maxLength="40" required />
               </div>
             </fieldset>
             <button className="profile__button-edit" type="submit">Редактировать</button>

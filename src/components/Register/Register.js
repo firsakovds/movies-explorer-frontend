@@ -14,15 +14,15 @@ function Register() {
           <fieldset className="register__inputs">
             <div className="register__field-input">
               <label className="register__name-input">Имя</label>
-              <input className="register__input" type="name" id="name" placeholder="Виталий" minLength="2" maxLength="40" required readOnly />
+              <input className="register__input" type="name" id="name" placeholder="Введите имя" defaultValue="Виталий" minLength="2" maxLength="40" required />
             </div>
             <div className="register__field-input">
               <label className="register__name-input">E-mail</label>
-              <input className="register__input" type="email" id="email" value="pochta@yandex.ru" minLength="2" maxLength="40" required readOnly />
+              <input className="register__input" type="email" id="email" placeholder="Введите почту" defaultValue="pochta@yandex.ru" minLength="2" maxLength="40" required />
             </div>
             <div className="register__field-input">
               <label className="register__name-input">Пароль</label>
-              <input className="register__input" type="password" id="password" value="***************" minLength="2" maxLength="40" required readOnly />
+              <input className="register__input" type="password" id="password" placeholder="Введите пароль" defaultValue="***************" minLength="2" maxLength="40" required />
             </div>
             <p className="register__error-text">Что-то пошло не так...</p>
           </fieldset>

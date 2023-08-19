@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import "../BurgerMenu/BurgerMenu.css"
 import React from "react"
-function BurgerMenu() {
+function BurgerMenu({ isOpen, onClose }) {
   return (
-    <section className="burger burger__open burger__overlay">
+    <section className={isOpen ? `burger burger__open burger__overlay` : `burger  burger__overlay`}>
       <div className="burger__div">
-        <button className="burger__button-close" type="button"></button>
+        <button className="burger__button-close" type="button" onClick={onClose}></button>
         <div className="burger__links">
           <Link className="burger__link" to="/">Главная
           </Link>

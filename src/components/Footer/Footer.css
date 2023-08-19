@@ -86,7 +86,7 @@
   }
 
   .footer__data {
-    padding-top: 30px;
+    padding-top: 15px;
     padding-bottom: 20px;
     display: flex;
     flex-direction: column-reverse;
@@ -108,9 +108,10 @@
   }
 
   .footer__copyright {
-    padding-top: 18px;
+    padding-top: 25px;
     text-align: center;
     color: rgba(160, 160, 160, 1);
+    font-size: 12px;
   }
   .footer__links-item {
     text-align: center;

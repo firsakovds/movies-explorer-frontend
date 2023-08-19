@@ -14,11 +14,11 @@ function Login() {
           <fieldset className="login__inputs">
             <div className="login__field-input">
               <label className="login__name-input">E-mail</label>
-              <input className="login__input" type="email" id="email" value="pochta@yandex.ru" minLength="2" maxLength="40" required readOnly />
+              <input className="login__input" type="email" id="email" placeholder="Введите почту" defaultValue="pochta@yandex.ru" minLength="2" maxLength="40" required />
             </div>
             <div className="login__field-input">
               <label className="login__name-input">Пароль</label>
-              <input className="login__input" type="password" id="password" value="" minLength="2" maxLength="40" required readOnly />
+              <input className="login__input" type="password" id="password" placeholder="Введите пароль" minLength="2" maxLength="40" required />
             </div>
             <p className="login__error-text">Что-то пошло не так...</p>
           </fieldset>

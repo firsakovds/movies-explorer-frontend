@@ -2,7 +2,6 @@
   top: 0;
   right: 0;
   position: fixed;
-  visibility: hidden;
   z-index: 2;
 }
 
@@ -11,7 +10,7 @@
 }
 
 .burger__open {
-  /*visibility: visible;*/
+  visibility: visible;
 }
 
 .burger__div {
@@ -34,15 +33,17 @@
   background-size: cover;
   background-color: transparent;
   border: none;
-  transform: rotate(0deg);
+  transform: rotate(90deg);
   align-self: flex-end;
   margin-right: 22px;
   margin-top: 22px;
+  transition: 0.5s;
 }
 
 .burger__button-close:hover {
   cursor: pointer;
   opacity: 0.8;
+  transform: scale(1.2);
 }
 
 .burger__links {
@@ -130,6 +131,10 @@
   }
 }
 @media (max-width: 540px) {
+  .burger__button-close {
+    margin-right: 13px;
+    margin-top: 12px;
+  }
   .burger__links {
     width: 100vw;
     margin-top: 73px;

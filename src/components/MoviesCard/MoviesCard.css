@@ -58,7 +58,7 @@
   background-color: transparent;
 }
 .card__like-button:hover {
- opacity: 0.8;
+  opacity: 0.8;
 }
 
 .card__like-button_active {
