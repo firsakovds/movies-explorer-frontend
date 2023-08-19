@@ -20,12 +20,12 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-top: 40px;
+  margin-top: 35px;
 }
 
 .login__form {
   width: 396px;
-  margin-top: 40px;
+  margin-top: 12px;
 }
 
 .login__inputs {
@@ -41,7 +41,7 @@
 
 .login__name-input {
   margin: 0;
-  margin-top: 24px;
+  margin-top: 29px;
   color: #a0a0a0;
   font-family: Inter;
   font-size: 10px;
@@ -60,7 +60,7 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  padding-bottom: 5px;
+  padding-bottom: 6px;
   border-bottom: 1px solid #e8e8e8;
 }
 
@@ -96,7 +96,7 @@
   font-weight: 500;
   line-height: normal;
   border: none;
-  margin-top: 147px;
+  margin-top: 203px;
 }
 
 .login__button-submit:hover {
@@ -140,6 +140,11 @@
   cursor: pointer;
   opacity: 0.7;
 }
+@media (max-width: 768px) {
+  .login {
+    margin-top: 232px;
+  }
+}
 
 @media (max-width: 408px) {
   .login {
@@ -151,7 +156,6 @@
     height: 38px;
     margin: 0 auto;
     display: flex;
-   
   }
 
   .login__button-submit {
@@ -166,8 +170,7 @@
   }
   .login__title {
     margin: 0 auto;
-   margin-top: 51px;
-   
+    margin-top: 51px;
   }
   .login__footer-text {
     font-size: 12px;

@@ -65,7 +65,7 @@
 @media (max-width: 500px) {
   .movies-cards__list {
     grid-template-columns: 1fr;
-
+    margin-top: 3px;
     column-gap: 30px;
   }
 
@@ -74,5 +74,8 @@
   }
   .movies-cards__button {
     max-width: 240px;
+  }
+  .movies-cards__button {
+    margin-top: 43px;
   }
 }
