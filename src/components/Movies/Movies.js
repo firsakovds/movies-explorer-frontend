@@ -2,7 +2,7 @@ import "../Movies/Movies.css"
 import HeaderMovies from "../Header/HeaderMovies";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer"
-//import Preloader from "../Preloader/Preloader";
+import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import React from "react";
 function Movies({ isMovies }) {
@@ -10,7 +10,7 @@ function Movies({ isMovies }) {
     <div>
       <HeaderMovies />
       <SearchForm />
-      {/*<Preloader/>*/}
+      <Preloader/>
       <MoviesCardList isMovies={isMovies} />
       <Footer />
     </div>

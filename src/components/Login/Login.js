@@ -21,11 +21,11 @@ function Login() {
         </div>
         <p className="login__error-text">Что-то пошло не так...</p>
       </fieldset>
-      <button className="login__button-submit" type="submit">Зарегистрироваться</button>
+      <button className="login__button-submit" type="submit">Войти</button>
     </form>
     <div className="login__footer">
-      <p className="login__footer-text">Уже зарегистрированы?</p>
-      <Link to="/signin" className="login__footer-link">Войти</Link>
+      <p className="login__footer-text">Ещё не зарегистрированы?</p>
+      <Link to="/signin" className="login__footer-link">Регистрация</Link>
     </div>
   </section>
   )

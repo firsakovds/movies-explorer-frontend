@@ -3,7 +3,7 @@
   display: flex;
   max-width: 100%;
   flex-direction: column;
-  padding-bottom: 38px;
+  padding-bottom: 12px;
 }
 
 .card_img {
@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-top: 14px;
+  padding-top: 13px;
   border-bottom: 1px solid rgba(232, 232, 232, 1);
   padding-bottom: 25px;
 }
@@ -35,7 +35,7 @@
 .card__time {
   margin: 0;
   display: flex;
-  max-width: 34px;
+  max-width: 41px;
   color: #a0a0a0;
   font-family: Inter;
   font-size: 11px;
@@ -43,6 +43,7 @@
   font-weight: 400;
   line-height: normal;
   padding-top: 6px;
+  flex-direction: row;
 }
 
 .card__like-button {
@@ -73,15 +74,12 @@
   opacity: 0;
   transition: opacity 0.5s ease-in;
 }
-.card:hover  .card__delete-button {
-opacity: 1;  
+.card:hover .card__delete-button {
+  opacity: 1;
 }
 @media (max-width: 768px) {
   .card {
     max-width: 106%;
-  }
-  .card_img {
-    
   }
 }
 
@@ -89,15 +87,10 @@ opacity: 1;
   .card {
     max-width: 100%;
   }
-  .card_img {
-   
-  }
 }
 
 @media (max-width: 370px) {
   .card {
-    max-width: 290px;
+    max-width: 296px;
   }
-
-  .card_img {}
 }

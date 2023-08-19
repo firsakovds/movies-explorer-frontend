@@ -65,7 +65,6 @@
   width: 22px;
   padding-right: 6px;
   padding-top: 1px;
-  
 }
 
 @media (max-width: 768px) {
@@ -85,14 +84,12 @@
     /* 178.571% */
     letter-spacing: -1.12px;
   }
-  .portfolio__link {   
+  .portfolio__link {
     padding-bottom: 41px;
-   
   }
 
   .portfolio__list-arrow {
     width: 17px;
-    
   }
 }
 
@@ -107,16 +104,9 @@
   .portfolio {
     padding: 18px 14px 29px 14px;
   }
-
-  .portfolio__list-item {
-  
-   
-  }
-
   .portfolio__list-arrow {
     padding-left: 23px;
     width: 11px;
-   
   }
 
   .portfolio__list-text {

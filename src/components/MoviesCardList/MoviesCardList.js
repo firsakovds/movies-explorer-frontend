@@ -14,7 +14,14 @@ function MoviesCardList({isMovies}) {
         <MoviesCard isMovies={isMovies}/>
         <MoviesCard isMovies={isMovies}/>
         <MoviesCard isMovies={isMovies}/>
-       
+        <MoviesCard isMovies={isMovies} isLiked={true}/>
+        <MoviesCard isMovies={isMovies}/>
+        <MoviesCard isMovies={isMovies}/>
+        <MoviesCard isMovies={isMovies}/>     
+        <MoviesCard isMovies={isMovies} isLiked={true}/>
+        <MoviesCard isMovies={isMovies}/>
+        <MoviesCard isMovies={isMovies}/>
+        <MoviesCard isMovies={isMovies}/>  
       </ul>
       <button className="movies-cards__button" type="button">Ещё</button>
     </section>

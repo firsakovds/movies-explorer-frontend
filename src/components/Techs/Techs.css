@@ -38,7 +38,6 @@
 .techs__scroll-item {
   margin: 0 auto;
   width: 90px;
-
   border-radius: 10px;
   background: #e8e8e8;
   color: #000;
@@ -59,14 +58,12 @@
     padding-right: 50px;
     margin-top: -11px;
     margin-bottom: -4px;
-    
   }
   .techs__header {
     margin-top: 80px;
     margin-bottom: 22px;
   }
   .techs__subtitle {
-   
     margin-bottom: 80px;
   }
   .techs__scroll {
@@ -75,7 +72,6 @@
   }
   .techs__scroll-item {
     width: 84px;
-
     font-size: 12px;
     letter-spacing: -0.48px;
   }
@@ -102,7 +98,7 @@
     margin-bottom: 50px;
     max-width: 255px;
     font-size: 11px;
-text-align: center;
+    text-align: center;
     line-height: 16px; /* 145.455% */
     letter-spacing: -0.44px;
   }

@@ -144,15 +144,35 @@
 @media (max-width: 408px) {
   .login {
     width: 260px;
-    margin-top: 70px;
+    margin-top: 54px;
+  }
+  .login__logo {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto;
+    display: flex;
+   
   }
 
   .login__button-submit {
     width: 260px;
-    margin-top: 222px;
+    margin-top: 295px;
+    font-size: 12px;
   }
 
   .login__form {
     width: 260px;
+    margin-top: 58px;
+  }
+  .login__title {
+    margin: 0 auto;
+   margin-top: 51px;
+   
+  }
+  .login__footer-text {
+    font-size: 12px;
+  }
+  .login__footer-link {
+    font-size: 12px;
   }
 }
