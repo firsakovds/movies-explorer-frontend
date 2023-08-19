@@ -17,7 +17,7 @@ function Navigation() {
       </div>
       <Link className="navigation__profile" to="/profile">
         <p className="navigation__profile-link">Аккаунт</p>
-        <button className="navigation__profile-icon" />
+        <button className="navigation__profile-icon" type="button"></button>
       </Link>
       <BurgerMenu />
     </nav>

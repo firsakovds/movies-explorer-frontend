@@ -5,11 +5,14 @@
 }
 .search__form {
   margin: 0;
-  padding-bottom: 13px;
-  border-bottom: 1px solid #e8e8e8;
+}
+.search__form-container {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 13px;
+  border-bottom: 1px solid #e8e8e8;
 }
 .search__input {
   margin: 0;
@@ -22,8 +25,9 @@
   border: none;
   width: 85%;
 }
-.search__input:focus {
-  outline: none;
+.search__input:focus {  
+  outline: 2px solid blue;
+  border-radius: 48px;
 }
 .search__button {
   width: 58.65px;
@@ -57,7 +61,6 @@
   }
   .search__input {
     font-size: 18px;
-
     font-weight: 500;
   }
   .search__button {

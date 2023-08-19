@@ -11,12 +11,14 @@ function Main() {
   return (
     <div>
       <Header />
-      <Promo />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
-      <Footer/>
+      <main>
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
     </div>
   )
 }

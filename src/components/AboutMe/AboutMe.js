@@ -1,14 +1,14 @@
 import "../AboutMe/AboutMe.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import MyFoto from "../../images/myfoto.jpg";
+import MyFoto from "../../images/my_foto.jpg";
 function AboutMe() {
   return (
     <section className="about-me">
-      <h3 className="about-me__title section-title">Студент</h3>
+      <h2 className="about-me__title section-title">Студент</h2>
       <div className="about-me__div">
         <div className="about-me__info">
-          <h2 className="about-me__header section-header">Дмитрий</h2>
+          <h3 className="about-me__header section-header">Дмитрий</h3>
           <p className="about-me__subtitle">
             Юный фронтенд-разработчик, 35 лет
           </p>

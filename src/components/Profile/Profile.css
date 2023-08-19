@@ -65,7 +65,8 @@
   border: none;
 }
 .profile__input:focus {
-  outline: none;
+  outline: 2px solid blue;
+  border-radius: 2px;
 }
 
 .profile__button-edit {

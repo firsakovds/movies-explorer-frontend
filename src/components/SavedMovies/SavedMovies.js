@@ -8,8 +8,10 @@ function SavedMovies() {
   return (
     <div>
       <HeaderMovies />
-      <SearchForm />
-      <MoviesCardList />
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
     </div>
   )

@@ -36,6 +36,9 @@
   line-height: 18px; /* 138.462% */
   padding-right: 16px;
 }
+.navigation__movies-link:hover {
+ opacity: 0.7;
+}
 .navigation__profile-link {
   margin: 0;
   padding-right: 7px;
@@ -50,7 +53,7 @@
 }
 
 .navigation__profile-icon {
-  background-image: url("../../images/movies_account-icon.png");
+  background-image: url("../../images/movies_account-icon.svg");
   background-repeat: no-repeat;
   background-position: center;
   width: 29px;
@@ -63,7 +66,13 @@
 }
 
 @media (max-width: 768px) {
-  .navigation {
+  .navigation__movies-links {
+    display: none;
+  }
+  .navigation__profile-link {
+    display: none;
+  }
+  .navigation__profile-icon {
     display: none;
   }
 }

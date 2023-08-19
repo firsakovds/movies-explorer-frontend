@@ -10,10 +10,10 @@ function Header() {
       <Link to="/">
         <img className="header__logo" alt="логотип" src={logo} />
       </Link>
-      <div className="header__menu">
+      <nav className="header__menu">
         <Link to="/signup" className="header__signup-link">Регистрация</Link>
-        <button className="header__signin-button" onClick={() => navigate("/signin")}>Войти</button>
-      </div>
+        <button className="header__signin-button" type="button" onClick={() => navigate("/signin")}>Войти</button>
+      </nav>
     </header>
   )
 }

@@ -1,4 +1,4 @@
-.header_movies {
+.header__movies {
   display: flex;
   flex-direction: row;
   margin: 0 auto;
@@ -30,12 +30,12 @@
   .header__burger-button {
     display: block;
   }
-  .header_movies {
+  .header__movies {
     padding: 16px 30px 18px 30px;
   }
 }
 @media (max-width: 320px) {
-  .header_movies {
+  .header__movies {
     padding: 15px 14px 18px 14px;
   }
   .header__burger-button {

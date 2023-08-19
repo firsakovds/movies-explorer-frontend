@@ -19,7 +19,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login />} />
-        <Route path="/notfound" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

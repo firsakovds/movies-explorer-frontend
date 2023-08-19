@@ -9,9 +9,11 @@ function Movies({ isMovies }) {
   return (
     <div>
       <HeaderMovies />
-      <SearchForm />
-      <Preloader/>
-      <MoviesCardList isMovies={isMovies} />
+      <main>
+        <SearchForm />
+        <Preloader />
+        <MoviesCardList isMovies={isMovies} />
+      </main>
       <Footer />
     </div>
   )

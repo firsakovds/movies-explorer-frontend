@@ -6,12 +6,12 @@ import Navigation from "../Navigation/Navigation";
 
 function HeaderMovies() {  
   return (
-    <header className="header_movies">
-      <Link to="/movies">
+    <header className="header__movies">
+      <Link to="/">
         <img className="header__logo-movies" alt="логотип" src={logo} />
       </Link>
      <Navigation/>
-     <button className="header__burger-button "></button>
+     <button className="header__burger-button" type="button"></button>
     </header>
   )
 }
