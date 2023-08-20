@@ -1,0 +1,105 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  width: 59%;
+  justify-content: space-between;
+}
+
+.navigation__profile {
+  width: 100px;
+  height: 32px;
+  display: flex;
+  margin: 0;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 40px;
+  background: #fff;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+}
+.navigation__profile:hover {
+  opacity: 0.7;
+}
+.navigation__movies-links {
+  display: flex;
+  align-items: center;
+}
+.navigation__movies-link {
+  margin: 0;
+  text-decoration: none;
+  color: #000;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 138.462% */
+  padding-right: 16px;
+}
+.navigation__movies-link:hover {
+  opacity: 0.7;
+}
+.navigation__profile-link {
+  margin: 0;
+  padding-right: 7px;
+  padding-left: 11px;
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px; /* 92.308% */
+  text-decoration: none;
+}
+
+.navigation__profile-icon {
+  background-image: url("../../images/movies_account-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+.navigation__profile-icon:hover {
+  cursor: pointer;
+}
+.navigation__burger-button {
+  width: 44px;
+  height: 44px;
+  background-image: url("../../images/icon_header.svg");
+  display: none;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.navigation__burger-button:hover {
+  opacity: 0.7;
+  transition: 0.2s;
+}
+@media (max-width: 768px) {
+  .navigation__movies-links {
+    display: none;
+  }
+  .navigation__profile-link {
+    display: none;
+  }
+  .navigation__profile-icon {
+    display: none;
+  }
+  .navigation__burger-button {
+    display: block;
+  }
+  .navigation__profile {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 320px) {
+  .navigation__burger-button {
+    width: 40px;
+    height: 40px;
+  }
+}

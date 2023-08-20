@@ -1,0 +1,33 @@
+.header__movies {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 70px 13px 70px;
+}
+.header__logo-movies {
+  width: 38px;
+  height: 38px;
+}
+.header__logo-movies:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .header__burger-button {
+    display: block;
+  }
+  .header__movies {
+    padding: 16px 30px 18px 30px;
+  }
+}
+@media (max-width: 320px) {
+  .header__movies {
+    padding: 15px 14px 18px 14px;
+  }
+  .header__burger-button {
+    width: 40px;
+    height: 40px;
+  }
+}

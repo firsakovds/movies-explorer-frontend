@@ -1,0 +1,161 @@
+.burger {
+  top: 0;
+  right: 0;
+  position: fixed;
+  z-index: 2;
+}
+
+.burger__overlay {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.burger__open {
+  visibility: visible;
+}
+
+.burger__div {
+  margin: 0;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 520px;
+  height: 100vh;
+  position: relative;
+  background: #fff;
+  margin-left: 100vw;
+}
+
+.burger__button-close {
+  width: 22px;
+  height: 22px;
+  background-image: url("../../images/burger_icon-close.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  transform: rotate(90deg);
+  align-self: flex-end;
+  margin-right: 22px;
+  margin-top: 22px;
+  transition: 0.5s;
+}
+
+.burger__button-close:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+.burger__links {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  align-items: center;
+  margin-top: 76px;
+}
+
+.burger__link {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: none;
+  padding-top: 28px;
+}
+
+.burger__link_active {
+  border-bottom: 2px solid rgba(0, 0, 0, 1);
+}
+
+.burger__link:hover {
+  opacity: 0.7;
+}
+
+.burger__profile {
+  width: 100px;
+  height: 32px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 40px;
+  background: #fff;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  position: fixed;
+  bottom: 90px;
+}
+
+.burger__profile:hover {
+  opacity: 0.7;
+}
+
+.burger__profile-link {
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  /* 92.308% */
+  text-align: right;
+  padding-left: 12px;
+}
+
+.burger__profile-icon {
+  background-image: url("../../images/movies_account-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 3px solid white;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .burger__button-close {
+    width: 32px;
+    height: 32px;
+    margin-right: 22px;
+    margin-top: 22px;
+  }
+
+  .burger__link:nth-child(2) {
+    padding-bottom: 5px;
+  }
+  .burger__link:nth-child(3) {
+    padding-top: 24px;
+  }
+}
+@media (max-width: 540px) {
+  .burger__button-close {
+    margin-right: 13px;
+    margin-top: 12px;
+  }
+  .burger__links {
+    width: 100vw;
+    margin-top: 73px;
+  }
+  .burger__link {
+    padding-bottom: 3px;
+  }
+  .burger__link:nth-child(2) {
+    padding-top: 20px;
+    padding-bottom: 8px;
+  }
+  .burger__link:nth-child(3) {
+    padding-top: 15px;
+    padding-bottom: 8px;
+  }
+
+  .burger__div {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .burger__profile {
+    bottom: 46px;
+  }
+}
