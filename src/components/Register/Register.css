@@ -103,9 +103,9 @@
   margin-top: 135px;
 }
 .register__button-submit_disabled {
+  pointer-events: none;
   background: #f8f8f8;
-  color: #c2c2c2;
-  cursor: none;
+  color: #c2c2c2;  
 }
 
 .register__button-submit:hover {

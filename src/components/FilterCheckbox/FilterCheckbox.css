@@ -4,7 +4,7 @@
   margin-top: 32px;
   cursor: pointer;
   align-items: center;
-  padding-bottom: 47px;
+  padding-bottom: 47px; 
 }
 
 .filter__chechbox {
@@ -12,6 +12,7 @@
   width: 36px;
   height: 20px;
   position: relative;
+  
 }
 .filter__chechbox:hover {
   opacity: 0.8;
