@@ -9,9 +9,7 @@
 .card__img {
   display: flex;
   width: 100%;
-  
-  /*max-width: 360px;
-    height: 201px;*/
+  height: 151px;
 }
 
 .card__div {
@@ -20,7 +18,7 @@
   justify-content: space-between;
   padding-top: 13px;
   border-bottom: 1px solid rgba(232, 232, 232, 1);
-  padding-bottom: 25px;
+  padding-bottom: 17px;
 }
 
 .card__title {
@@ -33,6 +31,7 @@
   font-weight: 500;
   line-height: normal;
   max-width: 226px;
+  height: 32px;
 }
 
 .card__time {
@@ -60,6 +59,7 @@
   border: none;
   background-color: transparent;
 }
+
 .card__like-button:hover {
   opacity: 0.8;
 }
@@ -89,15 +89,14 @@
   opacity: 0;
   transition: opacity 0.5s ease-in;
 }
+
 .card:hover .card__delete-button {
   opacity: 1;
 }
+
 @media (max-width: 768px) {
   .card {
     max-width: 106%;
-  }
-  .card__img {
-   
   }
 }
 

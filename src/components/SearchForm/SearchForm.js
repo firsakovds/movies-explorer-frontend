@@ -26,7 +26,7 @@ function SearchForm({ onSearch, onChecked, onChangeChecked }) {
 
   return (
     <section className="search">
-      <form className="search__form" onSubmit={handleSubmit} noValidate>
+      <form className="search__form" onSubmit={handleSubmit} >
         <div className="search__form-container">
           <input
             className="search__input"
