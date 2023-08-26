@@ -1,12 +1,16 @@
 import { BASE_URL } from "./constants";
 
 export class MainApi {
-  constructor({ url }) {
-    this._url = url;
+  constructor(options) {
+    this._url = options.url;
   }
 
-  _checkServerResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  _checkError(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getUserInfo() {
@@ -16,7 +20,7 @@ export class MainApi {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
-    }).then(this._checkServerResponse);
+    }).then(this._checkError);
   }
 
   updateUserInfo(data) {
@@ -30,7 +34,7 @@ export class MainApi {
         name: data.name,
         email: data.email,
       }),
-    }).then(this._checkServerResponse);
+    }).then(this._checkError);
   }
 
   createMovie(movie) {
@@ -53,7 +57,7 @@ export class MainApi {
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
       }),
-    }).then(this._checkServerResponse);
+    }).then(this._checkError);
   }
 
   getSavedMovies() {
@@ -63,7 +67,7 @@ export class MainApi {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
-    }).then(this._checkServerResponse);
+    }).then(this._checkError);
   }
 
   deleteMovie(id) {
@@ -73,7 +77,12 @@ export class MainApi {
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
-    }).then(this._checkServerResponse);
+    }).then(this._checkError);
+  }
+
+  getUserAndSavedMovies() {
+    const promises = [this.getUserInfo(), this.getSavedMovies()];
+    return Promise.all(promises);
   }
 }
 

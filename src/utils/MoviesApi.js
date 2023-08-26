@@ -1,12 +1,16 @@
-import { BASE_BEATFILMMOVIES_URL } from "./constants";
+import { BASE_URL_MOVIES } from "./constants";
 
 export class MoviesApi {
-  constructor({ url }) {
-    this._url = url;
+  constructor(options) {
+    this._url = options.url;
   }
 
-  _checkServerResponse(res) {
-    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  _checkError(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getInitialMovies = () => {
@@ -15,12 +19,12 @@ export class MoviesApi {
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(this._checkServerResponse);
+    }).then(this._checkError);
   };
 }
 
 const moviesApi = new MoviesApi({
-  url: BASE_BEATFILMMOVIES_URL,
+  url: BASE_URL_MOVIES,
 });
 
 export default moviesApi;

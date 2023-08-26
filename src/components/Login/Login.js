@@ -1,52 +1,16 @@
 import "../Login/Login.css";
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useFormWithValidation } from "../../utils/Validation";
+
 function Login({ onLogin, isLoading }) {
-  const [userData, setUserData] = useState({
-    email: {
-      value: "",
-      isValid: false,
-      errorMessage: "",
-    },
-    password: {
-      value: "",
-      isValid: false,
-      errorMessage: "",
-    },
-  });
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
-  const isValid = userData.email.isValid && userData.password.isValid;
-  const [disabled, setDisabled] = useState(false);
-
-  useEffect(() => {
-    isValid ? setDisabled(false) : setDisabled(false);
-  }, [isValid]);
-  useEffect(() => {
-    isLoading ? setDisabled(true) : setDisabled(false);
-  }, [isLoading]);
-
-  const handleChange = (evt) => {
-    const { name, value, validity, validationMessage } = evt.target;
-    setUserData((prevState) => ({
-      ...prevState,
-      [name]: {
-        ...userData[name],
-        value,
-        isValid: validity.valid,
-        errorMessage: validationMessage,
-      },
-    }));
-  };
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    onLogin({
-      email: userData.email.value,
-      password: userData.password.value,
-    });
-    setUserData({ email: "", password: "" });
-  };
+  function handleSubmit(e) {
+    e.preventDefault();
+    onLogin(values);
+  }
 
   return (
     <main>
@@ -64,12 +28,12 @@ function Login({ onLogin, isLoading }) {
                 type="email"
                 name="email"
                 placeholder="Введите почту"
-                value={userData.email.value || ""}
+                value={values.email || ""}
                 onChange={handleChange}
                 required
               />
             </div>
-            <p className="login__error-text">{userData.email.errorMessage}</p>
+            <p className="login__error-text">{errors.email}</p>
             <div className="login__field-input">
               <label className="login__name-input">Пароль</label>
               <input
@@ -79,21 +43,19 @@ function Login({ onLogin, isLoading }) {
                 placeholder="Введите пароль"
                 minLength="8"
                 maxLength="40"
-                value={userData.password.value || ""}
+                value={values.password || ""}
                 onChange={handleChange}
                 required
               />
             </div>
-            <p className="login__error-text">
-              {userData.password.errorMessage}
-            </p>
+            <p className="login__error-text">{errors.password}</p>
           </fieldset>
           <button
             className={`login__button-submit ${
               isValid && !isLoading ? "" : "login__button-submit_disabled"
             }`}
             type="submit"
-            disabled={disabled}
+            disabled={!isValid}
           >
             Войти
           </button>

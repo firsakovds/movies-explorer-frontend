@@ -66,6 +66,14 @@
 
 .card__like-button_active {
   background-image: url("../../images/like.svg");
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left: 20px;
+  border: none;
+  background-color: transparent;
 }
 
 .card__delete-button {

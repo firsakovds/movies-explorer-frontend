@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Navigate} from 'react-router-dom';
 
 const ProtectedRoute = ({component: Component, ...props}) => {
     const [loggedIn, setLoggedIn] = useState(true);
@@ -13,7 +13,7 @@ const ProtectedRoute = ({component: Component, ...props}) => {
     return (
         <Route>
             {
-                () => loggedIn ? <Component {...props} /> : <Redirect to="/"/>
+                () => loggedIn ? <Component {...props} /> : <Navigate to="/"/>
             }
         </Route>
     )
