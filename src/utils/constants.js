@@ -1,4 +1,4 @@
-export const BASE_URL = "http://localhost:3000";
+export const BASE_URL = "https://api.movies.firsakovds.nomoreparties.co";
 export const BASE_URL_MOVIES = "https://api.nomoreparties.co";
 export const NOT_FOUND = "Ничего не найдено";
 export const SERVER_ERROR = "Внутренняя ошибка сервера";
