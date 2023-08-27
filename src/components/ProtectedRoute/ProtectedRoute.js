@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Route, Navigate} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 
-const ProtectedRoute = ({component: Component, ...props}) => {
+const ProtectedRoute = ({element: Component, ...props}) => {
     const [loggedIn, setLoggedIn] = useState(true);
 
     useEffect(() => {
@@ -10,13 +10,8 @@ const ProtectedRoute = ({component: Component, ...props}) => {
         }
     }, []);
 
-    return (
-        <Route>
-            {
-                () => loggedIn ? <Component {...props} /> : <Navigate to="/"/>
-            }
-        </Route>
-    )
+    return loggedIn ? <Component {...props} /> : <Navigate to="/"/>       
+    
 }
 
 export default ProtectedRoute;

@@ -1,7 +1,7 @@
 .search {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 70px 70px 48px 70px;
+  padding: 58px 70px 48px 70px;
 }
 
 .search__form {
@@ -56,15 +56,32 @@
   cursor: pointer;
 }
 
+.search__button_active {
+  pointer-events: none;
+  background: #C2C2C2;
+}
+
+.search__message {
+  color: #ff3055;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 12px;
+  margin: 0;
+  margin-left: 5px;
+}
+
 @media (max-width: 768px) {
   .search {
-    padding: 76px 30px 48px 30px;
+    padding: 54px 30px 48px 30px;
   }
 }
 
 @media (max-width: 320px) {
   .search {
-    padding: 82px 14px 0px 14px;
+    padding: 70px 14px 0px 14px;
   }
 
   .search__input {

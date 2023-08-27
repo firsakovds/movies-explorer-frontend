@@ -6,7 +6,7 @@ import { useFormWithValidation } from "../../utils/Validation";
 
 function SearchForm({ onSearch, onChecked, onChangeChecked }) {
   const location = useLocation();
-  const { values, handleChange, setIsValid } = useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -15,7 +15,7 @@ function SearchForm({ onSearch, onChecked, onChangeChecked }) {
   }
 
   React.useEffect(() => {
-    setIsValid(true);
+    //setIsValid(true);
     if (location.pathname === "/movies") {
       const moviesStorage = JSON.parse(localStorage.getItem("movies"));
       if (moviesStorage) {
@@ -23,10 +23,12 @@ function SearchForm({ onSearch, onChecked, onChangeChecked }) {
       }
     }
   }, [location]);
+  
 
   return (
     <section className="search">
-      <form className="search__form" onSubmit={handleSubmit} >
+      <span className="search__message">{errors.search}</span>
+      <form className="search__form" onSubmit={handleSubmit}>
         <div className="search__form-container">
           <input
             className="search__input"
@@ -36,8 +38,14 @@ function SearchForm({ onSearch, onChecked, onChangeChecked }) {
             type="text"
             onChange={handleChange}
             value={values.search || ""}
-          ></input>
-          <button className="search__button" type="submit">
+          />
+          <button
+            className={`search__button ${
+              !isValid ? "search__button_active" : ""
+            }`}
+            type="submit"
+            disabled={!isValid}
+          >
             Найти
           </button>
         </div>

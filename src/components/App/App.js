@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-//import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -36,6 +36,7 @@ setInfoTooltipImage(imageSuccess);
 setText();
 */
 
+
   React.useEffect(() => {
     tokenCheck();
   }, []);
@@ -61,14 +62,13 @@ setText();
             setLoggedIn(true);
           }
         })
-        .catch((err) => {
-      
+        .catch((err) => {      
           console.log(err);
           });
     }
   }
   // логин
-  function handleLogin({ password, email }) {
+  function handleLogin({ password, email }) {    
     auth
       .authorize({ password, email })
       .then((res) => {
@@ -208,7 +208,7 @@ const handleMovieSave = (someMovie) => {
 }
 
 // удаление лайка=удалить из массива фильм
-function handleMovieDelete(movie)  {
+function handleMovieDelete(movie)  { 
   const movieId = movie._id || (likeMovie.find((m) => m.movieId === movie.id))._id;
   function deleteFromList(moviesArray)  {
     return moviesArray.filter((oneMovie) => oneMovie._id !== movieId)
@@ -216,8 +216,8 @@ function handleMovieDelete(movie)  {
   mainApi.deleteMovie(movieId)
     .then(() => {
       setLikeMovie((moviesArray) => deleteFromList(moviesArray));
-      const newStorage = deleteFromList(JSON.parse(localStorage.getItem('saved-movies')));
-      localStorage.setItem('saved-movies', JSON.stringify(newStorage));
+       deleteFromList(JSON.parse(localStorage.getItem('saved-movies')));
+      localStorage.setItem('saved-movies', JSON.stringify(deleteFromList));
     })
     .catch((err) => {     
       console.log(err)
@@ -260,8 +260,8 @@ function handleExit() {
           <Route
             path="/movies"
             element={
-            
-             <Movies  
+            <ProtectedRoute                
+             element={Movies}  
               isLoading={isLoading}
               loggedIn={loggedIn}
               searchText={searchText}
@@ -276,11 +276,12 @@ function handleExit() {
           />
           <Route
             path="/saved-movies"
-            element={
-              <SavedMovies
+            element={<ProtectedRoute 
+              loggedIn={loggedIn}
+              element={SavedMovies}
       
               isLoading={isLoading}
-              loggedIn={loggedIn}
+              
               likeMovie={likeMovie}
               searchText={searchText}
               onSearch={handleSearchMovie}
@@ -292,8 +293,9 @@ function handleExit() {
           />
           <Route
             path="/profile"
-            element={ 
-              <Profile
+            element={ <ProtectedRoute 
+              loggedIn={loggedIn}
+              element={Profile}
               isExit={handleExit}
                 onSignOut={handleSignOut}
                 onUpdateUser={handleUpdateUser}
