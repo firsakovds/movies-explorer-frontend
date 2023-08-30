@@ -1,7 +1,8 @@
-export const BASE_URL = "https://api.movies.firsakovds.nomoreparties.co";
+export const BASE_URL = "http://localhost:3000";
 export const BASE_URL_MOVIES = "https://api.nomoreparties.co";
 export const NOT_FOUND = "Ничего не найдено";
-export const SERVER_ERROR = "Внутренняя ошибка сервера";
+export const SERVER_ERROR =
+  "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз";
 export const ACCESS_IS_ALLOWED = "Вход выполнен";
 export const ACCESS_IS_DENAIED = "Проверьте данные";
 export const ACCESS_IS_BYE = "До свидания";

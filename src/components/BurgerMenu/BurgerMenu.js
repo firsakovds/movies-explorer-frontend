@@ -1,17 +1,53 @@
-import { Link } from "react-router-dom";
-import "../BurgerMenu/BurgerMenu.css"
-import React from "react"
+import { Link, useLocation } from "react-router-dom";
+import "../BurgerMenu/BurgerMenu.css";
+import React from "react";
+
 function BurgerMenu({ isOpen, onClose }) {
+  const location = useLocation();
   return (
-    <section className={isOpen ? `burger burger__open burger__overlay` : `burger  burger__overlay`}>
+    <section
+      className={
+        isOpen
+          ? `burger burger__open burger__overlay`
+          : `burger  burger__overlay`
+      }
+    >
       <div className="burger__div">
-        <button className="burger__button-close" type="button" onClick={onClose}></button>
+        <button
+          className="burger__button-close"
+          type="button"
+          onClick={onClose}
+        ></button>
         <div className="burger__links">
-          <Link className="burger__link" to="/">Главная
+          <Link
+            className={
+              location.pathname === "/"
+                ? `burger__link burger__link_active`
+                : `burger__link`
+            }
+            to="/"
+          >
+            Главная
           </Link>
-          <Link className="burger__link burger__link_active" to="/movies">Фильмы
+          <Link
+            className={
+              location.pathname === "/movies"
+                ? `burger__link burger__link_active`
+                : `burger__link`
+            }
+            to="/movies"
+          >
+            Фильмы
           </Link>
-          <Link className="burger__link" to="/saved-movies">Сохранённые фильмы
+          <Link
+            className={
+              location.pathname === "/saved-movies"
+                ? `burger__link burger__link_active`
+                : `burger__link`
+            }
+            to="/saved-movies"
+          >
+            Сохранённые фильмы
           </Link>
           <Link className="burger__profile" to="/profile">
             <p className="burger__profile-link">Аккаунт</p>
@@ -20,6 +56,6 @@ function BurgerMenu({ isOpen, onClose }) {
         </div>
       </div>
     </section>
-  )
+  );
 }
 export default BurgerMenu;

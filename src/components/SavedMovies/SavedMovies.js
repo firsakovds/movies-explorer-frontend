@@ -9,36 +9,33 @@ import Preloader from "../Preloader/Preloader";
 
 function SavedMovies({
   isLoading,
+  movies,
+  onChecked,
   likeMovie,
-  searchText,
-  onMovieDelete,
   onSearch,
-  checkedShortMovies,
+  onChangeChecked,
+  isWarningMessage,
+  savedMovies,
+  onMovieDelete,
 }) {
-  const [checkedCheckbox, setCheckedCheckbox] = React.useState(false);
-
-  function handleChange() {
-    setCheckedCheckbox(!checkedCheckbox);
-    checkedShortMovies(!checkedCheckbox);
-  }
-
   return (
     <div>
       <HeaderMovies />
       <main>
         <SearchForm
+          onChecked={onChecked}
+          onChangeChecked={onChangeChecked}
           onSearch={onSearch}
-          checkedCheckbox={checkedCheckbox}
-          onChangeChecked={handleChange}
         />
         {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList
-            likeMovie={likeMovie}
-            searchText={searchText}
+            movies={movies}
             onMovieDelete={onMovieDelete}
-            checkedCheckbox={checkedCheckbox}
+            savedMovies={savedMovies}
+            likeMovie={likeMovie}
+            isWarningMessage={isWarningMessage}
           />
         )}
       </main>

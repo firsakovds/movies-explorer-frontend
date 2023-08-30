@@ -1,51 +1,45 @@
 import "../SearchForm/SearchForm.css";
 import React from "react";
-import { useLocation } from "react-router-dom";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useFormWithValidation } from "../../utils/Validation";
 
-function SearchForm({ onSearch, onChecked, onChangeChecked }) {
-  const location = useLocation();
-  const { values, handleChange, errors, isValid } = useFormWithValidation();
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const { search } = values;
-    onSearch(search);
-  }
+function SearchForm({ onSearch, onChecked, onChangeChecked, value }) {
+  const { handleChange, isValid } = useFormWithValidation();
+  const [errorText, setErrorText] = React.useState("");
+  const [inputSearch, setInputSearch] = React.useState("");
 
   React.useEffect(() => {
-    //setIsValid(true);
-    if (location.pathname === "/movies") {
-      const moviesStorage = JSON.parse(localStorage.getItem("movies"));
-      if (moviesStorage) {
-        values.search = moviesStorage.searchText;
-      }
-    }
-  }, [location]);
-  
+    setInputSearch(value);
+  }, [value]);
 
+  function handleFormChange(evt) {
+    setInputSearch(evt.target.value);
+    handleChange(evt);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!isValid) {
+      setErrorText("Введите название фильма");
+      return;
+    }
+    onSearch(inputSearch);
+  }
   return (
     <section className="search">
-      <span className="search__message">{errors.search}</span>
-      <form className="search__form" onSubmit={handleSubmit}>
+      <span className="search__message">{!isValid && errorText}</span>
+      <form className="search__form" onSubmit={handleSubmit} noValidate>
         <div className="search__form-container">
           <input
             className="search__input"
             placeholder="Фильм"
-            required
             name="search"
             type="text"
-            onChange={handleChange}
-            value={values.search || ""}
+            value={inputSearch || ""}
+            required
+            onChange={handleFormChange}
           />
-          <button
-            className={`search__button ${
-              !isValid ? "search__button_active" : ""
-            }`}
-            type="submit"
-            disabled={!isValid}
-          >
+          <button className="search__button" type="submit">
             Найти
           </button>
         </div>

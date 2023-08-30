@@ -1,4 +1,5 @@
 import { BASE_URL } from "./constants";
+
 export class Auth {
   constructor(options) {
     this._baseUrl = options.baseUrl;

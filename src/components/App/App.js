@@ -3,7 +3,7 @@ import React from "react";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
@@ -12,30 +12,43 @@ import NotFound from "../NotFound/NotFound";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import auth from "../../utils/Auth";
 import mainApi from "../../utils/MainApi";
-import moviesApi from '../../utils/MoviesApi';
+import moviesApi from "../../utils/MoviesApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { filterMovies } from '../../utils/Filter';
-import { SERVER_ERROR } from '../../utils/constants';
-import imageError from "../../images/signDown.svg"
-import imageSuccess from "../../images/signUp.svg"
-import {ACCESS_IS_DENAIED, ACCESS_IS_ALLOWED, ACCESS_IS_BYE, ACCESS_IS_DATA, ACCESS_IS_DONE} from "../../utils/constants"
+import { filterMovies, shortMovies } from "../../utils/Filter";
+import imageError from "../../images/signDown.svg";
+import imageSuccess from "../../images/signUp.svg";
+import {
+  ACCESS_IS_DENAIED,
+  ACCESS_IS_ALLOWED,
+  ACCESS_IS_BYE,
+  ACCESS_IS_DATA,
+  ACCESS_IS_DONE,
+  SERVER_ERROR,
+} from "../../utils/constants";
+
 function App() {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
-  const [searchText, setSearchText] = React.useState("");
-  const [likeMovie, setLikeMovie] = React.useState([]); 
-  const [checkedShortMovies, setCheckedShortMovies] = React.useState(false);  
+  const [allMovies, setAllMovies] = React.useState([]);
+  const [foundedMovies, setFoundedMovies] = React.useState([]);
+  const [foundMoviesList, setFoundMoviesList] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [showAllMovies, setShowAllMovies] = React.useState(savedMovies);
+  const [filterSavedMovies, setFilterSavedMovies] =
+    React.useState(showAllMovies);
+  const [search, setSearch] = React.useState("");
+  const [checkedShortMovies, setCheckedShortMovies] = React.useState(false);
+  const [checkedShortSaveMovie, setCheckedShortSaveMovie] =
+    React.useState(false);
+  const [isWarningMessage, setIsWarningMessage] = React.useState(false);
+  const [isWarningMessageSaveMovi, setIsWarningMessageSaveMovi] =
+    React.useState(false);
   const [infoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [infoTooltipImage, setInfoTooltipImage] = React.useState(null);
-  const [text, setText] = React.useState('');
- /*
-infoTooltipOpen(true);
-setInfoTooltipImage(imageSuccess);
-setText();
-*/
-
+  const [text, setText] = React.useState("");
+  const location = useLocation();
 
   React.useEffect(() => {
     tokenCheck();
@@ -62,13 +75,28 @@ setText();
             setLoggedIn(true);
           }
         })
-        .catch((err) => {      
+        .catch((err) => {
           console.log(err);
-          });
+        });
+      mainApi
+        .getSavedMovies()
+        .then((data) => {
+          setLoggedIn(true);
+          setSavedMovies(data);
+          setFilterSavedMovies(data);
+          setShowAllMovies(data);
+        })
+        .catch((err) => {
+          setInfoTooltipOpen(true);
+          setInfoTooltipImage(imageError);
+          setText(SERVER_ERROR);
+          console.log(err);
+          setLoggedIn(false);
+        });
     }
   }
   // логин
-  function handleLogin({ password, email }) {    
+  function handleLogin({ password, email }) {
     auth
       .authorize({ password, email })
       .then((res) => {
@@ -76,182 +104,257 @@ setText();
           setLoggedIn(true);
           localStorage.setItem("jwt", res.token);
           tokenCheck();
-          getAllMovies();
           navigate("/movies");
-
           setInfoTooltipOpen(true);
           setInfoTooltipImage(imageSuccess);
           setText(ACCESS_IS_ALLOWED);
+
+          moviesApi.getInitialMovies().then((userMovies) => {
+            localStorage.setItem("movies", JSON.stringify(userMovies));
+            setAllMovies(JSON.parse(localStorage.getItem("movies")));
+          });
         }
       })
-      .catch((err) => { 
-
+      .catch((err) => {
         setInfoTooltipOpen(true);
         setInfoTooltipImage(imageError);
         setText(ACCESS_IS_DENAIED);
         console.log(err);
-      })
-      
+      });
   }
   //удалим токен
-  function handleSignOut() {   
+  function handleSignOut() {
     localStorage.clear();
     setLoggedIn(false);
-    setCurrentUser({ name: "", email: "", _id: "" });   
-
+    setCurrentUser({ name: "", email: "", _id: "" });
+    setFoundMoviesList([]);
+    setCheckedShortMovies(false);
+    setSearch("");
+    setIsWarningMessageSaveMovi(false);
+    setIsWarningMessage(false);
     navigate("/");
- 
   }
   // обновим профиль
   function handleUpdateUser({ name, email }) {
-    //setIsLoading(true);
     mainApi
       .updateUserInfo({ name, email })
-      .then((res) => {        
+      .then((res) => {
         setCurrentUser({
           name: res.name,
           email: res.email,
-        }); 
-
+        });
         setInfoTooltipOpen(true);
         setInfoTooltipImage(imageSuccess);
         setText(ACCESS_IS_DATA);
       })
       .catch((err) => {
-
-        setInfoTooltipOpen(true);
-        setInfoTooltipImage(imageError);
-        setText(ACCESS_IS_DENAIED);
-        console.log(err);    
-      });
-  }
-  // регистрация
-  function handleRegister({ name, password, email }) {
-    //setIsLoading(true);
-    auth
-      .register({ name, password, email })
-      .then(() => {
-              handleLogin({ password, email });
-        navigate("/movies");
-
-        setInfoTooltipOpen(true);
-        setInfoTooltipImage(imageSuccess);
-        setText(ACCESS_IS_DONE);
-      })
-      
-      .catch((err) => {     
-
         setInfoTooltipOpen(true);
         setInfoTooltipImage(imageError);
         setText(ACCESS_IS_DENAIED);
         console.log(err);
       });
   }
-//
-function getAllMovies() {
-  moviesApi.getInitialMovies()
-    .then((allMovies) => localStorage.setItem('all-movies', JSON.stringify(allMovies)))
-    .catch((err) => {      
-      console.log(err);
-      });
-}
-function handleSearchMovie (searchText)  {
-  setSearchText(searchText)
- // setIsLoading(true);
-  if (location.pathname === '/movies') {
-    try {
-      const allMovies = JSON.parse(localStorage.getItem('all-movies'))
-      const newMovies = filterMovies(allMovies, checkedShortMovies, searchText)
-      localStorage.setItem('movies', JSON.stringify({ movies: newMovies, searchText: searchText, checkedShortMovies: checkedShortMovies }));
-    }
-    catch (err) {
-      console.log(err);
-      return localStorage.setItem('movies', JSON.stringify({
-        movies: [SERVER_ERROR],
-        searchText: searchText
-      }));
-    }
-    finally {
-      //setIsLoading(false)
-    }
-  } else {
-    try {
-      const newMovies = filterMovies(JSON.parse(localStorage.getItem('saved-movies')), checkedShortMovies, searchText);
-      setLikeMovie(newMovies);
-    }
-    catch (err) {
-      console.log(err);
-      setLikeMovie([SERVER_ERROR]);
-    }
-    finally {
-     // setIsLoading(false)
-    }
-  }
-}
-// фильтр
-// поставить лайк=сохранить фильм
-// обработка попадания в сохраненные
-const handleMovieSave = (someMovie) => {
-  const likedMovie = likeMovie.find((m) => m.movieId === someMovie.id);  
-  tokenCheck();
-  (likedMovie) ? handleMovieDelete(likedMovie) :
-      mainApi.createMovie(someMovie).then((res) => {
-          setLikeMovie((likeMovie) => [...likeMovie, res]);
-          localStorage.setItem("saved-movies", JSON.stringify([...likeMovie, res])
-          );
-      }).catch(
-          (err) => {
-              console.log(err);
-
-          }
-      )
-}
-
-// удаление лайка=удалить из массива фильм
-function handleMovieDelete(movie)  { 
-  const movieId = movie._id || (likeMovie.find((m) => m.movieId === movie.id))._id;
-  function deleteFromList(moviesArray)  {
-    return moviesArray.filter((oneMovie) => oneMovie._id !== movieId)
-  }
-  mainApi.deleteMovie(movieId)
-    .then(() => {
-      setLikeMovie((moviesArray) => deleteFromList(moviesArray));
-       deleteFromList(JSON.parse(localStorage.getItem('saved-movies')));
-      localStorage.setItem('saved-movies', JSON.stringify(deleteFromList));
-    })
-    .catch((err) => {     
-      console.log(err)
-    });
-}
-
-React.useEffect(() => {
-  if (loggedIn === true) {
-    setIsLoading(true);
-    mainApi.getUserAndSavedMovies()
-      .then(([user, movies]) => {
-        setCurrentUser(user);
-        setLikeMovie(movies);
-        localStorage.setItem('saved-movies', JSON.stringify(movies));
+  // регистрация
+  function handleRegister({ name, password, email }) {
+    auth
+      .register({ name, password, email })
+      .then(() => {
+        handleLogin({ password, email });
+        navigate("/movies");
+        setInfoTooltipOpen(true);
+        setInfoTooltipImage(imageSuccess);
+        setText(ACCESS_IS_DONE);
       })
       .catch((err) => {
-        console.log(err)
-      })
-      .finally(() => setIsLoading(false));
+        setInfoTooltipOpen(true);
+        setInfoTooltipImage(imageError);
+        setText(ACCESS_IS_DENAIED);
+        console.log(err);
+      });
   }
-}, [loggedIn, navigate]);
 
-function isLiked(movie)  {
-  return likeMovie.some(m => m.movieId === movie.id)
-}
-function closePopUp() {
-  setInfoTooltipOpen(false)
-}
-function handleExit() {
-  setInfoTooltipOpen(true);
-  setInfoTooltipImage(imageSuccess);
-  setText(ACCESS_IS_BYE);
-}
-  
+  //далее блок /movies
+  React.useEffect(() => {
+    setSearch(localStorage.getItem("search" || ""));
+    setCheckedShortMovies(
+      localStorage.getItem("checkedShortMovies" || "") === "true"
+    );
+    if (localStorage.getItem("searchListMovies")) {
+      const movies = JSON.parse(localStorage.getItem("searchListMovies"));
+      setFoundedMovies(movies);
+      if (movies.length === 0) {
+        setIsWarningMessage(true);
+      }
+      if (localStorage.getItem("checkedShortMovies") === "true") {
+        setFoundMoviesList(shortMovies(movies));
+      } else {
+        setFoundMoviesList(movies);
+      }
+    }
+  }, []);
+
+  function handleChangeCheckbox() {
+    setCheckedShortMovies(!checkedShortMovies);
+    if (!checkedShortMovies) {
+      const filteredShortMovies = shortMovies(foundedMovies);
+      setFoundMoviesList(filteredShortMovies);
+      if (filteredShortMovies.length === 0) {
+        setIsWarningMessage(true);
+      }
+    } else {
+      setFoundMoviesList(foundedMovies);
+      if (foundedMovies.length > 0) {
+        setIsWarningMessage(false);
+      }
+    }
+    localStorage.setItem("checkedShortMovies", !checkedShortMovies);
+  }
+
+  function handleSetFilterMovies(movies, inputSearch, checkbox) {
+    const searchList = filterMovies(movies, inputSearch, false);
+    searchList.length === 0
+      ? setIsWarningMessage(true)
+      : setIsWarningMessage(false);
+    setFoundedMovies(searchList);
+    setFoundMoviesList(checkbox ? shortMovies(searchList) : searchList);
+    localStorage.setItem("searchListMovies", JSON.stringify(searchList));
+  }
+
+  function handleRequestMovies(inputSearch) {
+    localStorage.setItem("search", inputSearch);
+    localStorage.setItem("checkedShortMovies", checkedShortMovies);
+    if (allMovies.length === 0) {
+      setIsLoading(true);
+      moviesApi
+        .getInitialMovies()
+        .then((movies) => {
+          localStorage.setItem("allMovies", JSON.stringify(movies));
+          setAllMovies(movies);
+          handleSetFilterMovies(movies, inputSearch, checkedShortMovies);
+        })
+        .catch((err) => {
+          setInfoTooltipOpen(true);
+          setInfoTooltipImage(imageError);
+          setText(SERVER_ERROR);
+          console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      handleSetFilterMovies(allMovies, inputSearch, checkedShortMovies);
+    }
+  }
+
+  //далее блок /saved-movies
+  React.useEffect(() => {
+    if (localStorage.getItem("checkedShortSaveMovie") === "true") {
+      setCheckedShortSaveMovie(true);
+      setShowAllMovies(shortMovies(savedMovies));
+    } else {
+      setCheckedShortSaveMovie(false);
+      setShowAllMovies(savedMovies);
+    }
+  }, [savedMovies]);
+
+  React.useEffect(() => {
+    if (savedMovies.length === 0) {
+      return;
+    }
+  }, [search, foundMoviesList, savedMovies]);
+
+  function handleChangeCheckboxSavedMovies() {
+    setCheckedShortSaveMovie(!checkedShortSaveMovie);
+    if (!checkedShortSaveMovie) {
+      localStorage.setItem("checkedShortSaveMovie", true);
+      setCheckedShortSaveMovie(true);
+      setShowAllMovies(shortMovies(filterSavedMovies));
+      if (shortMovies(filterSavedMovies).length === 0) {
+        setIsWarningMessageSaveMovi(false);
+      }
+      setIsWarningMessageSaveMovi(false);
+    } else {
+      setCheckedShortSaveMovie(false);
+      localStorage.setItem("checkedShortSaveMovie", false);
+      if (filterSavedMovies.length === 0) {
+        setIsWarningMessageSaveMovi(false);
+        setShowAllMovies(filterSavedMovies);
+      }
+      setIsWarningMessageSaveMovi(false);
+      setShowAllMovies(filterSavedMovies);
+    }
+  }
+
+  function handleSearchSavedMovies(inputSearch) {
+    const foundSavedMovies = filterMovies(
+      savedMovies,
+      inputSearch,
+      checkedShortSaveMovie
+    );
+    if (foundSavedMovies.length === 0) {
+      setIsWarningMessageSaveMovi(true);
+      setShowAllMovies(foundSavedMovies);
+      setFilterSavedMovies(foundSavedMovies);
+    } else {
+      setIsWarningMessageSaveMovi(false);
+      setFilterSavedMovies(foundSavedMovies);
+      setShowAllMovies(foundSavedMovies);
+    }
+  }
+
+  React.useEffect(() => {
+    if (location.pathname === "/saved-movies") {
+      setCheckedShortSaveMovie(false);
+      setShowAllMovies(savedMovies);
+    }
+  }, [location]);
+
+  //далее обработка лайка дислайка удаления
+  function likeMovie(movie) {
+    return savedMovies.some((item) => item.movieId === movie.id);
+  }
+
+  function handleLike(movie) {
+    const jwt = localStorage.getItem("jwt");
+    mainApi
+      .createMovie(movie, jwt)
+      .then((newMovie) => {
+        setSavedMovies([...savedMovies, newMovie]);
+        setFilterSavedMovies([...savedMovies, newMovie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleDelete(movie) {
+    const jwt = localStorage.getItem("jwt");
+    const deleteCard = savedMovies.find(
+      (item) => item.movieId === (movie.id || movie.movieId)
+    );
+    if (!deleteCard) return;
+    mainApi
+      .deleteMovie(deleteCard._id, jwt)
+      .then(() => {
+        setSavedMovies(savedMovies.filter((c) => c._id !== deleteCard._id));
+        setFilterSavedMovies(
+          savedMovies.filter((c) => c._id !== deleteCard._id)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function closePopUp() {
+    setInfoTooltipOpen(false);
+  }
+  function handleExit() {
+    setInfoTooltipOpen(true);
+    setInfoTooltipImage(imageSuccess);
+    setText(ACCESS_IS_BYE);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -260,43 +363,47 @@ function handleExit() {
           <Route
             path="/movies"
             element={
-            <ProtectedRoute                
-             element={Movies}  
-              isLoading={isLoading}
-              loggedIn={loggedIn}
-              searchText={searchText}
-              likeMovie={likeMovie}
-              onSearch={handleSearchMovie}
-              checkedShortMovies={setCheckedShortMovies}
-              onMovieSave={handleMovieSave}
-              onMovieDelete={handleMovieDelete} 
-              isLiked={isLiked}        
+              <ProtectedRoute
+                element={Movies}
+                isLoading={isLoading}
+                loggedIn={loggedIn}
+                likeMovie={likeMovie}
+                movies={foundMoviesList}
+                onMovieSave={handleLike}
+                onMovieDelete={handleDelete}
+                savedMovies={savedMovies}
+                isWarningMessage={isWarningMessage}
+                onSearch={handleRequestMovies}
+                onChecked={handleChangeCheckbox}
+                onChangeChecked={checkedShortMovies}
               />
             }
           />
           <Route
             path="/saved-movies"
-            element={<ProtectedRoute 
-              loggedIn={loggedIn}
-              element={SavedMovies}
-      
-              isLoading={isLoading}
-              
-              likeMovie={likeMovie}
-              searchText={searchText}
-              onSearch={handleSearchMovie}
-              onMovieDelete={handleMovieDelete}
-              checkedShortMovies={setCheckedShortMovies} 
-              isLiked={isLiked}           
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+                isLoading={isLoading}
+                movies={showAllMovies}
+                likeMovie={likeMovie}
+                saveMovie={savedMovies}
+                isWarningMessage={isWarningMessageSaveMovi}
+                onMovieDelete={handleDelete}
+                onSearch={handleSearchSavedMovies}
+                onChecked={handleChangeCheckboxSavedMovies}
+                onChangeChecked={checkedShortSaveMovie}
               />
             }
           />
           <Route
             path="/profile"
-            element={ <ProtectedRoute 
-              loggedIn={loggedIn}
-              element={Profile}
-              isExit={handleExit}
+            element={
+              <ProtectedRoute
+                loggedIn={loggedIn}
+                element={Profile}
+                isExit={handleExit}
                 onSignOut={handleSignOut}
                 onUpdateUser={handleUpdateUser}
               />
@@ -315,7 +422,7 @@ function handleExit() {
       </div>
       <InfoTooltip
         isOpen={infoTooltipOpen}
-       onClose={closePopUp}
+        onClose={closePopUp}
         text={text}
         image={infoTooltipImage}
       />

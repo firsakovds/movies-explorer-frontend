@@ -8,7 +8,7 @@ function Navigation() {
   const clickBurger = () => {
     setIsOpen(!isOpen);
   };
-  //const navigate = useNavigate();
+  
   return (
     <nav className="navigation">
       <div className="navigation__movies-links">

@@ -3,33 +3,17 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { getTimeFromMins } from "../../utils/Filter";
 
-function MoviesCard({ movie, onMovieSave, onMovieDelete, isLiked, likeMovie }) {
-  const location = useLocation();
-  const moviesLocation = location.pathname === "/movies";
-  const [isSaved, setIsSaved] = React.useState(false);
-
-  React.useEffect(() => {
-    likeMovie?.map((m) => {
-      if (movie._id === m._id) {
-        setIsSaved(true);
-      }
-    });
-  }, [likeMovie]);
+function MoviesCard({ movie, onMovieSave, onMovieDelete, likeMovie }) {
+  const location = useLocation().pathname;
+  const isLiked = likeMovie(movie);
 
   function handleLike() {
-    if (!isSaved) {
-      onMovieSave(movie);
-      setIsSaved(true);
-    } else {
-      onMovieDelete(movie);
-      setIsSaved(false);
-    }
+    onMovieSave(movie);
   }
 
-  const handleDelete = () => {
+  function handleDelete() {
     onMovieDelete(movie);
-    setIsSaved(false);
-  };
+  }
 
   return (
     <li className="card">
@@ -37,22 +21,22 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, isLiked, likeMovie }) {
         <img
           className="card__img"
           src={
-            moviesLocation
+            location === "/movies"
               ? `https://api.nomoreparties.co/${movie.image.url}`
-              : movie.image
+              : `${movie.image}`
           }
-          alt={movie.nameRU}
+          alt={`постер к фильму ${movie.nameRU || movie.nameEN}`}
         />
       </a>
       <div className="card__div">
         <h2 className="card__title">{movie.nameRU}</h2>
-        {moviesLocation ? (
+        {location === "/movies" ? (
           <button
-            className={`${
-              isLiked(movie) ? "card__like-button_active" : "card__like-button"
+            className={`card__like-button ${
+              isLiked ? "card__like-button card__like-button_active" : ""
             }`}
             type="button"
-            onClick={handleLike}
+            onClick={isLiked ? handleDelete : handleLike}
           ></button>
         ) : (
           <button

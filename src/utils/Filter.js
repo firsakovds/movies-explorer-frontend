@@ -1,47 +1,25 @@
-import { NOT_FOUND, SHORT_DURATION } from "../utils/constants";
-
-export function filterMovies(movies, checkedShorts, searchText) {
-  const searchedMovies = movies.filter((movie) => {
-    if (typeof movie === "string") {
-      return [];
-    } else {
-      const movieRu = movie.nameRU.toLowerCase();
-      const movieEn = movie.nameEN.toLowerCase();
-      if (searchText) {
-        return (
-          movieRu.includes(searchText.toLowerCase()) ||
-          movieEn.includes(searchText.toLowerCase())
-        );
-      } else {
-        return movieRu || movieEn;
-      }
-    }
-  });
-  if (
-    checkedShorts &&
-    typeof searchedMovies[0] !== "string" &&
-    searchedMovies.length > 0
-  ) {
-    const shortMovies = searchedMovies.filter((movie) => {
-      return movie.duration <= SHORT_DURATION;
-    });
-    if (shortMovies.length > 0) {
-      return shortMovies;
-    } else {
-      return [NOT_FOUND];
-    }
-  } else if (
-    typeof searchedMovies[0] !== "string" &&
-    searchedMovies.length > 0
-  ) {
-    return searchedMovies;
-  } else {
-    return [NOT_FOUND];
-  }
-}
+import { SHORT_DURATION } from "../utils/constants";
 
 export function getTimeFromMins(mins) {
   let hours = Math.trunc(mins / 60);
   let minutes = mins % 60;
   return hours > 0 ? hours + "ч " + minutes + "м" : minutes + "м";
 }
+
+export const filterMovies = (movies, inputSearch, checkbox) => {
+  const moviesSearchText = movies.filter((movie) => {
+    return (
+      movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) ||
+      movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())
+    );
+  });
+  if (checkbox) {
+    return shortMovies(moviesSearchText);
+  } else {
+    return moviesSearchText;
+  }
+};
+
+export const shortMovies = (movies) => {
+  return movies.filter((movie) => movie.duration <= SHORT_DURATION);
+};
