@@ -3,12 +3,21 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { getTimeFromMins } from "../../utils/Filter";
 
-function MoviesCard({ movie, onMovieSave, onMovieDelete, likeMovie }) {
+function MoviesCard({
+  movie,
+  handleLike,
+  isLiked,
+  savedMovies,
+  onMovieDelete,
+}) {
   const location = useLocation().pathname;
-  const isLiked = likeMovie(movie);
 
-  function handleLike() {
-    onMovieSave(movie);
+  function onLikeMovie() {
+    if (isLiked) {
+      onMovieDelete(savedMovies.filter((m) => m.movieId === movie.id)[0]);
+    } else {
+      handleLike(movie);
+    }
   }
 
   function handleDelete() {
@@ -32,16 +41,18 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, likeMovie }) {
         <h2 className="card__title">{movie.nameRU}</h2>
         {location === "/movies" ? (
           <button
-            className={`card__like-button ${
-              isLiked ? "card__like-button card__like-button_active" : ""
-            }`}
             type="button"
-            onClick={isLiked ? handleDelete : handleLike}
+            className={
+              isLiked
+                ? "card__like-button card__like-button_active"
+                : "card__like-button"
+            }
+            onClick={onLikeMovie}
           ></button>
         ) : (
           <button
-            className="card__delete-button"
             type="button"
+            className="card__delete-button"
             onClick={handleDelete}
           ></button>
         )}

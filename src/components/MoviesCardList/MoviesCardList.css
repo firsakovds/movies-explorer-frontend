@@ -17,11 +17,13 @@
   margin-top: 21px;
 }
 
-.movies__more {
+.movies-cards__more {
   margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
-.movies-cards__button {
+.movies-cards__more-button {
   margin: 0 auto;
   width: 320px;
   height: 36px;
@@ -39,11 +41,11 @@
   margin-top: 33px;
 }
 
-.movies-cards__button:hover {
+.movies-cards__more-button:hover {
   opacity: 0.8;
 }
 
-.movies-cards__button_hidden {
+.movies-cards__more-button_hidden {
   display: none;
 }
 
@@ -81,7 +83,7 @@
     padding: 0px 30px 80px 30px;
   }
 
-  .movies-cards__button {
+  .movies-cards__more-button {
     margin-top: 48px;
   }
 }
@@ -97,11 +99,8 @@
     padding: 40px 10px 80px 10px;
   }
 
-  .movies-cards__button {
+  .movies-cards__more-button {
     max-width: 240px;
-  }
-
-  .movies-cards__button {
     margin-top: 43px;
   }
 }

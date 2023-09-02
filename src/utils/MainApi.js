@@ -79,11 +79,6 @@ export class MainApi {
       },
     }).then(this._checkError);
   }
-
-  getUserAndSavedMovies() {
-    const promises = [this.getUserInfo(), this.getSavedMovies()];
-    return Promise.all(promises);
-  }
 }
 
 const mainApi = new MainApi({

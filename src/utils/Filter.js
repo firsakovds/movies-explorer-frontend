@@ -6,20 +6,16 @@ export function getTimeFromMins(mins) {
   return hours > 0 ? hours + "ч " + minutes + "м" : minutes + "м";
 }
 
-export const filterMovies = (movies, inputSearch, checkbox) => {
+export function filterMovies(movies, inputSearch) {
   const moviesSearchText = movies.filter((movie) => {
     return (
       movie.nameRU.toLowerCase().includes(inputSearch.toLowerCase()) ||
       movie.nameEN.toLowerCase().includes(inputSearch.toLowerCase())
     );
   });
-  if (checkbox) {
-    return shortMovies(moviesSearchText);
-  } else {
-    return moviesSearchText;
-  }
-};
+  return moviesSearchText;
+}
 
-export const shortMovies = (movies) => {
-  return movies.filter((movie) => movie.duration <= SHORT_DURATION);
-};
+export function shortsDuration(movies) {
+  return movies.filter((movie) => movie.duration < SHORT_DURATION);
+}

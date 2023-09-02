@@ -1,5 +1,6 @@
 //код валидации из песочницы
 import React, { useCallback } from "react";
+import validator from "validator";
 //хук управления формой и валидации формы
 export function useFormWithValidation() {
   const [values, setValues] = React.useState({});
@@ -11,9 +12,18 @@ export function useFormWithValidation() {
     const name = target.name;
     const value = target.value;
 
-    setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: target.validationMessage });
-    setIsValid(target.closest("form").checkValidity());
+    const validation = () => {
+      setValues({ ...values, [name]: value });
+      setErrors({ ...errors, [name]: target.validationMessage });
+      setIsValid(target.closest("form").checkValidity());
+    };
+    if (name === "email" && !validator.isEmail(value)) {
+      target.setCustomValidity("Введён неккоректный email");
+      validation();
+    } else {
+      target.setCustomValidity("");
+      validation();
+    }
   };
 
   const resetForm = useCallback(

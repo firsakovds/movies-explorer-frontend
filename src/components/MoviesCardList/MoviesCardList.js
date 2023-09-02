@@ -4,52 +4,73 @@ import React from "react";
 import { NOT_FOUND } from "../../utils/constants";
 import { useLocation } from "react-router-dom";
 import {
-  TABLET_DISPLAY,
-  MOBILE_DISPLAY,
-  CARD_ON_DESKTOP,
-  CARD_ON_TABLET,
-  CARD_ON_MOBILE,
   SHOW_MORE_DESKTOP,
-  SHOW_MORE_TABLET_AND_MOBILE,
+  SHOW_MORE_TABLET,
+  SHOW_MORE_MOBILE,
+  CARD_ON_MOBILE,
+  CARD_ON_TABLET,
+  CARD_ON_BIG_TABLET,
+  CARD_ON_DESKTOP,
+  MOBILE_DISPLAY,
+  TABLET_DISPLAY,
+  TABLET_BIG_DISPLAY,
+  DESKTOP_DISPLAY,
 } from "../../utils/constants";
 
 function MoviesCardList({
   movies,
-  onMovieSave,
+  handleLike,
+  savedMovies,
   onMovieDelete,
-  likeMovie,
   isWarningMessage,
 }) {
-  const location = useLocation();
+  const location = useLocation().pathname;
   const [row, setRow] = React.useState(0);
-  const windowScreen = window.innerWidth;
 
   React.useEffect(() => {
     changedWindow();
-  }, [windowScreen]);
+  }, []);
 
   React.useEffect(() => {
     setTimeout(() => {
       window.addEventListener("resize", changedWindow);
-    }, 1000);
+    }, 500);
+
+    return () => {
+      setTimeout(() => {
+        window.removeEventListener("resize", changedWindow);
+      });
+    };
   });
 
   function changedWindow() {
-    if (windowScreen > TABLET_DISPLAY) {
+    const windowScreen = window.innerWidth;
+    if (windowScreen > DESKTOP_DISPLAY) {
       setRow(CARD_ON_DESKTOP);
-    } else if (windowScreen > MOBILE_DISPLAY) {
+    } else if (windowScreen > TABLET_BIG_DISPLAY) {
+      setRow(CARD_ON_BIG_TABLET);
+    } else if (windowScreen > TABLET_DISPLAY) {
       setRow(CARD_ON_TABLET);
-    } else {
+    } else if (windowScreen <= MOBILE_DISPLAY) {
       setRow(CARD_ON_MOBILE);
     }
   }
 
   function handleMore() {
-    if (windowScreen > 1280) {
+    const windowScreen = window.innerWidth;
+    if (windowScreen > DESKTOP_DISPLAY) {
       setRow(row + SHOW_MORE_DESKTOP);
-    } else {
-      setRow(row + SHOW_MORE_TABLET_AND_MOBILE);
+    } else if (windowScreen > TABLET_BIG_DISPLAY) {
+      setRow(row + SHOW_MORE_TABLET);
+    } else if (windowScreen > TABLET_DISPLAY) {
+      setRow(row + SHOW_MORE_MOBILE);
+    } else if (windowScreen < MOBILE_DISPLAY) {
+      setRow(row + SHOW_MORE_MOBILE);
     }
+  }
+
+  function getSavedMovie(savedMovies, movie) {
+    return savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
   }
 
   return (
@@ -63,28 +84,47 @@ function MoviesCardList({
       >
         {NOT_FOUND}
       </p>
-
-      <ul className="movies-cards__list">
-        {movies.slice(0, row).map((movie) => (
-          <MoviesCard
-            key={movie.id || movie.movieId}
-            movie={movie}
-            onMovieSave={onMovieSave}
-            onMovieDelete={onMovieDelete}
-            likeMovie={likeMovie}
-          />
-        ))}
-      </ul>
-      {location.pathname === "/movies" && movies.length > row ? (
-        <button
-          className="movies-cards__button"
-          type="button"
-          onClick={handleMore}
-        >
-          Ещё
-        </button>
+      {location === "/movies" ? (
+        <div>
+          <ul className="movies-cards__list">
+            {movies.slice(0, row).map((movie) => (
+              <MoviesCard
+                key={movie._id || movie.id}
+                movie={movie}
+                isLiked={getSavedMovie(savedMovies, movie)}
+                handleLike={handleLike}
+                savedMovies={savedMovies}
+                onMovieDelete={onMovieDelete}
+              />
+            ))}
+          </ul>
+          <div className="movies-cards__more">
+            {movies.length > row ? (
+              <button
+                className="movies-cards__more-button"
+                type="button"
+                onClick={handleMore}
+              >
+                Ещё
+              </button>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       ) : (
-        ""
+        <ul className="movies-cards__list">
+          {movies.map((movie) => (
+            <MoviesCard
+              key={movie._id || movie.id}
+              movie={movie}
+              isLiked={getSavedMovie(savedMovies, movie)}
+              handleLike={handleLike}
+              savedMovies={savedMovies}
+              onMovieDelete={onMovieDelete}
+            />
+          ))}
+        </ul>
       )}
     </section>
   );

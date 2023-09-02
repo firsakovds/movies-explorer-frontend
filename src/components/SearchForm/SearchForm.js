@@ -3,14 +3,17 @@ import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useFormWithValidation } from "../../utils/Validation";
 
-function SearchForm({ onSearch, onChecked, onChangeChecked, value }) {
+function SearchForm({ onSearch, onChecked, onChangeChecked }) {
   const { handleChange, isValid } = useFormWithValidation();
   const [errorText, setErrorText] = React.useState("");
   const [inputSearch, setInputSearch] = React.useState("");
 
   React.useEffect(() => {
-    setInputSearch(value);
-  }, [value]);
+    if (location.pathname === "/movies" && localStorage.getItem("inputText")) {
+      const inputText = localStorage.getItem("inputText");
+      setInputSearch(inputText);
+    }
+  }, [location]);
 
   function handleFormChange(evt) {
     setInputSearch(evt.target.value);

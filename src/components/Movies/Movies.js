@@ -7,20 +7,16 @@ import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 function Movies({
-  onSearch,
   isLoading,
-  isWarningMessage,
-  isServerError,
   movies,
-  onChecked,
-  onChangeChecked,
-  likeMovie,
+  handleLike,
   savedMovies,
-  onMovieSave,
   onMovieDelete,
+  onSearch,
+  onChangeChecked,
+  onChecked,
+  isWarningMessage,
 }) {
-  const search = localStorage.getItem("search") || "";
-
   return (
     <div>
       <HeaderMovies />
@@ -29,20 +25,16 @@ function Movies({
           onSearch={onSearch}
           onChecked={onChecked}
           onChangeChecked={onChangeChecked}
-          value={search}
         />
         {isLoading ? (
           <Preloader />
         ) : (
           <MoviesCardList
             movies={movies}
-            likeMovie={likeMovie}
-            onMovieSave={onMovieSave}
-            onMovieDelete={onMovieDelete}
             savedMovies={savedMovies}
-            isMoviesPage={true}
+            handleLike={handleLike}
+            onMovieDelete={onMovieDelete}
             isWarningMessage={isWarningMessage}
-            isServerError={isServerError}
           />
         )}
       </main>
