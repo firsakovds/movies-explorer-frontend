@@ -1,21 +1,45 @@
-import "../Movies/Movies.css"
+import "../Movies/Movies.css";
+import React from "react";
 import HeaderMovies from "../Header/HeaderMovies";
 import SearchForm from "../SearchForm/SearchForm";
-import Footer from "../Footer/Footer"
+import Footer from "../Footer/Footer";
 import Preloader from "../Preloader/Preloader";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import React from "react";
-function Movies({ isMovies }) {
+
+function Movies({
+  isLoading,
+  movies,
+  handleLike,
+  savedMovies,
+  onMovieDelete,
+  onSearch,
+  onChangeChecked,
+  onChecked,
+  isWarningMessage,
+}) {
   return (
     <div>
       <HeaderMovies />
       <main>
-        <SearchForm />
-        <Preloader />
-        <MoviesCardList isMovies={isMovies} />
+        <SearchForm
+          onSearch={onSearch}
+          onChecked={onChecked}
+          onChangeChecked={onChangeChecked}
+        />
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <MoviesCardList
+            movies={movies}
+            savedMovies={savedMovies}
+            handleLike={handleLike}
+            onMovieDelete={onMovieDelete}
+            isWarningMessage={isWarningMessage}
+          />
+        )}
       </main>
       <Footer />
     </div>
-  )
+  );
 }
 export default Movies;

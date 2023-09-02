@@ -49,7 +49,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  padding-bottom: 16px;
+  padding-bottom: 12px;
   padding-top: 17px;
 }
 
@@ -68,6 +68,17 @@
   outline: 2px solid blue;
   border-radius: 2px;
 }
+.profile__error-text {
+  margin: 0;
+  margin-top: 6px;
+  color: #ff3055;
+  font-family: Inter;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 12px;
+}
 
 .profile__button-edit {
   margin-top: 193px;
@@ -85,6 +96,11 @@
 .profile__button-edit:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+.profile__button-submit_disabled { 
+  pointer-events: none;
+  color: #C2C2C2;
+  
 }
 
 .profile__link-exit {

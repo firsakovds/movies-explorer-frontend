@@ -7,10 +7,11 @@ import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio"
 import Footer from "../Footer/Footer"
-function Main() {
+import HeaderMovies from "../Header/HeaderMovies";
+function Main({loggedIn}) {
   return (
     <div>
-      <Header />
+      {loggedIn ? (<HeaderMovies/>) : (<Header/>)}
       <main>
         <Promo />
         <AboutProject />

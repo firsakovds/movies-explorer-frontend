@@ -44,7 +44,7 @@
 
 .login__name-input {
   margin: 0;
-  margin-top: 29px;
+  margin-top: 23px;
   color: #a0a0a0;
   font-family: Inter;
   font-size: 10px;
@@ -105,6 +105,11 @@
 .login__button-submit:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+.login__button-submit_disabled {
+  pointer-events: none;
+  background: #F8F8F8;
+  color: #C2C2C2;
 }
 
 .login__footer {

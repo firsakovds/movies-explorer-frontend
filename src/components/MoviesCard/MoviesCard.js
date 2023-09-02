@@ -1,17 +1,64 @@
-import "../MoviesCard/MoviesCard.css"
-import film from "../../images/card_pic.png"
-import React from "react"
+import "../MoviesCard/MoviesCard.css";
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { getTimeFromMins } from "../../utils/Filter";
 
-function MoviesCard({ isMovies, isLiked }) {
+function MoviesCard({
+  movie,
+  handleLike,
+  isLiked,
+  savedMovies,
+  onMovieDelete,
+}) {
+  const location = useLocation().pathname;
+
+  function onLikeMovie() {
+    if (isLiked) {
+      onMovieDelete(savedMovies.filter((m) => m.movieId === movie.id)[0]);
+    } else {
+      handleLike(movie);
+    }
+  }
+
+  function handleDelete() {
+    onMovieDelete(movie);
+  }
+
   return (
     <li className="card">
-      <img className="card__img" src={film} alt="постер фильма зона" />
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          className="card__img"
+          src={
+            location === "/movies"
+              ? `https://api.nomoreparties.co/${movie.image.url}`
+              : `${movie.image}`
+          }
+          alt={`постер к фильму ${movie.nameRU || movie.nameEN}`}
+        />
+      </a>
       <div className="card__div">
-        <h2 className="card__title">Зона</h2>
-        <button className={(` ${isMovies ? 'card__like-button' : 'card__delete-button'} ${isLiked ? 'card__like-button_active' : ''} `)} type="button" ></button>
+        <h2 className="card__title">{movie.nameRU}</h2>
+        {location === "/movies" ? (
+          <button
+            type="button"
+            className={
+              isLiked
+                ? "card__like-button card__like-button_active"
+                : "card__like-button"
+            }
+            onClick={onLikeMovie}
+          ></button>
+        ) : (
+          <button
+            type="button"
+            className="card__delete-button"
+            onClick={handleDelete}
+          ></button>
+        )}
       </div>
-      <p className="card__time">1ч 42м</p>
+      <p className="card__time">{getTimeFromMins(movie.duration)}</p>
     </li>
-  )
+  );
 }
 export default MoviesCard;

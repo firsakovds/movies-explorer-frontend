@@ -1,17 +1,56 @@
 import "../SearchForm/SearchForm.css";
-import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import React from "react";
-function SearchForm() {
+import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { useFormWithValidation } from "../../utils/Validation";
+
+function SearchForm({ onSearch, onChecked, onChangeChecked }) {
+  const { handleChange, isValid } = useFormWithValidation();
+  const [errorText, setErrorText] = React.useState("");
+  const [inputSearch, setInputSearch] = React.useState("");
+
+  React.useEffect(() => {
+    if (location.pathname === "/movies" && localStorage.getItem("inputText")) {
+      const inputText = localStorage.getItem("inputText");
+      setInputSearch(inputText);
+    }
+  }, [location]);
+
+  function handleFormChange(evt) {
+    setInputSearch(evt.target.value);
+    handleChange(evt);
+  }
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!isValid) {
+      setErrorText("Введите название фильма");
+      return;
+    }
+    onSearch(inputSearch);
+  }
   return (
     <section className="search">
-      <form className="search__form">
+      <span className="search__message">{!isValid && errorText}</span>
+      <form className="search__form" onSubmit={handleSubmit} noValidate>
         <div className="search__form-container">
-          <input className="search__input" placeholder="Фильм" required></input>
-          <button className="search__button" type="submit">Найти</button>
+          <input
+            className="search__input"
+            placeholder="Фильм"
+            name="search"
+            type="text"
+            value={inputSearch || ""}
+            required
+            onChange={handleFormChange}
+          />
+          <button className="search__button" type="submit">
+            Найти
+          </button>
         </div>
-        <FilterCheckbox />
+        <FilterCheckbox
+          onChecked={onChecked}
+          onChangeChecked={onChangeChecked}
+        />
       </form>
-
     </section>
   );
 }
