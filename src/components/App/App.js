@@ -155,7 +155,7 @@ function App() {
         console.log(err);
       });
   }
-  //блок saved
+  //далее блок /movies
   React.useEffect(() => {
     if (localStorage.getItem("movies")) {
       const movies = JSON.parse(localStorage.getItem("movies"));
