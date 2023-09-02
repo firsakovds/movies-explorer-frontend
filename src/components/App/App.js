@@ -51,6 +51,7 @@ function App() {
   }, []);
   //проверка токена
   function tokenCheck() {
+    setIsLoading(true);
     const token = localStorage.getItem("jwt");
     if (token) {
       mainApi
@@ -67,6 +68,9 @@ function App() {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
       mainApi
         .getSavedMovies()
@@ -111,10 +115,8 @@ function App() {
     setLoggedIn(false);
     setCurrentUser({ name: "", email: "", _id: "" });
     handleFilterMovies([]);
-
     localStorage.removeItem("movies");
     localStorage.removeItem("allMovies");
-
     navigate("/");
   }
   // обновим профиль
@@ -189,9 +191,9 @@ function App() {
   }, [filteredMovies]);
 
   function handleSearchMovies(search) {
+    tokenCheck();
     localStorage.setItem("inputText", search);
     localStorage.setItem("checkedShortMovies", shortMovies);
-
     if (localStorage.getItem("allMovies")) {
       const movies = JSON.parse(localStorage.getItem("allMovies"));
       handleFilterMovies(movies, search, shortMovies);

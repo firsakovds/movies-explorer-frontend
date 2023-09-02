@@ -25,10 +25,19 @@ function MoviesCardList({
   isWarningMessage,
 }) {
   const location = useLocation().pathname;
-  const [row, setRow] = React.useState(0);
+  const [row, setRow] = React.useState({});
 
   React.useEffect(() => {
-    changedWindow();
+    const windowScreen = window.innerWidth;
+    if (windowScreen > DESKTOP_DISPLAY) {
+      setRow(CARD_ON_DESKTOP);
+    } else if (windowScreen > TABLET_BIG_DISPLAY) {
+      setRow(CARD_ON_BIG_TABLET);
+    } else if (windowScreen > TABLET_DISPLAY) {
+      setRow(CARD_ON_TABLET);
+    } else if (windowScreen <= MOBILE_DISPLAY) {
+      setRow(CARD_ON_MOBILE);
+    }
   }, []);
 
   React.useEffect(() => {

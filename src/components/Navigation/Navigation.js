@@ -8,14 +8,28 @@ function Navigation() {
   const clickBurger = () => {
     setIsOpen(!isOpen);
   };
-  
+
   return (
     <nav className="navigation">
       <div className="navigation__movies-links">
-        <Link className="navigation__movies-link" to="/movies">
+        <Link
+          className={
+            location.pathname === "/movies"
+              ? `navigation__movies-link_active`
+              : `navigation__movies-link`
+          }
+          to="/movies"
+        >
           Фильмы
         </Link>
-        <Link className="navigation__movies-link" to="/saved-movies">
+        <Link
+          className={
+            location.pathname === "/saved-movies"
+              ? `navigation__movies-link_active`
+              : `navigation__movies-link`
+          }
+          to="/saved-movies"
+        >
           Сохранённые фильмы
         </Link>
       </div>
@@ -23,7 +37,15 @@ function Navigation() {
         <p className="navigation__profile-link">Аккаунт</p>
         <button className="navigation__profile-icon" type="button"></button>
       </Link>
-      {isOpen ? (<BurgerMenu isOpen={clickBurger} onClose={clickBurger} />) : (<button className="navigation__burger-button" type="button" onClick={clickBurger}></button>)}
+      {isOpen ? (
+        <BurgerMenu isOpen={clickBurger} onClose={clickBurger} />
+      ) : (
+        <button
+          className="navigation__burger-button"
+          type="button"
+          onClick={clickBurger}
+        ></button>
+      )}
     </nav>
   );
 }

@@ -112,4 +112,8 @@
     padding-bottom: 17px;
     max-width: 296px;
   }
+
+  .card .card__delete-button {
+    opacity: 1;
+  }
 }
